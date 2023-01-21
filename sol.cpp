@@ -1,24 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 105;
-double change[N];
-double dp[N][2];
-// dp[i][0]: 持有美金最大数
-// dp[i][1]: 持有马克最大数
+const int N = 1e5 + 5;
+int n, m;
+struct edge {
+    int to, next;
+}e[N << 1];
+int cnt;
+int head[N];
+void add_edge(int u, int v) {
+    cnt++;
+    e[cnt].to = v;
+    e[cnt].next = head[u];
+    head[u] = cnt;
+}
+int d1[N], d2[N];
+int maxv;
+void dfs(int u, int fa, int d[]) {
+    for (int i = head[u]; i; i = e[i].next) {
+        int v = e[i].to;
+        if (v == fa) continue;
+        d[v] = d[u] + 1;
+        if (d[v] > d[maxv]) maxv = v;
+        dfs(v, u, d);
+    }
+}
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int n;
-    cin >> n;
-    for (int i = 1; i <= n; i++) {
-        cin >> change[i];
+    cin >> n >> m;
+    for (int i = 1; i <= m; i++) {
+        int a, b;
+        cin >> a >> b;
+        add_edge(a, b);
+        add_edge(b, a);
     }   
-    dp[1][0] = 100.0;
-    dp[1][1] = change[1];
-    for (int i = 2; i <= n; i++) {
-        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] * 100.0 / change[i]);
-        dp[i][1] = max(dp[i - 1][0] * change[i] / 100.0, dp[i - 1][1]);
-    }
-    cout << fixed << setprecision(2) << dp[n][0] << '\n';
+    dfs(1, 0, d1);
+    dfs(maxv, 0, d2);
+    cout << d2[maxv] << '\n';
     return 0;
 }
