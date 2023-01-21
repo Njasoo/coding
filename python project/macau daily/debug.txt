@@ -1,0 +1,356 @@
+﻿<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>澳門日報電子版</title>
+<meta content="澳門日報版權所有 澳門日報電子報由澳門日報出版社出版" name="description"/>
+<link href="../../../tplimg/global.css" rel="stylesheet" type="text/css"/>
+<link href="../../../tplimg/calendar.css" rel="stylesheet" type="text/css"/>
+<script language="Javascript" src="../../../tplimg/prototype.js"></script>
+<script language="Javascript" src="../../../tplimg/range.js"></script>
+<script language="Javascript" src="../../../tplimg/mp.js"></script>
+<script language="Javascript" src="../../../tplimg/calendar2.js"></script>
+<style type="text/css">
+<!--
+body {
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+}
+ #list a:link {
+ color:#FF6600;
+ text-decoration:underline;
+   }
+ #list a:visited {
+ color:#606060;
+   text-decoration:none;
+     }
+ #list a:hover {
+ color:#000000;
+   text-decoration:none;
+   }
+ #list a:active {
+ color:#FF0000;
+   text-decoration:none;
+ }
+.css1 {
+  font-family: "宋体";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-top-style: 0;
+  border-right-style: 0;
+  border-bottom-style: 0;
+  border-left-style: 0;
+}
+#Layer1 {
+  position:absolute;
+  width:552px;
+  height:628px;
+  z-index:1;
+  left: 450px;
+  top: 0px;
+}
+.STYLE2 {
+  font-size: 14px;
+  font-weight: bold;
+}
+.STYLE3 {font-family: "宋体"}
+.STYLE8 {color: #005500; font-size: 14px;}
+.STYLE9 {font-family: "宋体"; font-size: 14px; color: #FFFFFF;}
+.STYLE10 {
+  font-size: 12px;
+  color: #000000;
+}
+.STYLE11 {font-size: 14px}
+#Layer2 {
+  position:absolute;
+  width:440px;
+  height:313px;
+  z-index:1;
+  left: 0px;
+  top: 664px;
+  background-color: #D9D9D9;
+}
+.STYLE19 {color: #FF0000; font-size: 12px; }
+.STYLE20 {font-size: 14px; color: #CC0000; }
+.style17 {color: #FF0000}
+#Layer3 {
+  position:absolute;
+  width:320px;
+  height:250px;
+  z-index:1;
+  left: 445px;
+  top: 632px;
+}
+#Layer4 {
+  position:absolute;
+  width:240px;
+  height:250px;
+  z-index:1;
+  left: 770px;
+  top: 632px;
+}
+#Layer5 {
+  position:absolute;
+  width:565px;
+  height:95px;
+  z-index:1;
+  left: 445px;
+  top: 882px;
+  background-color: #E8E8D7;
+}
+#Layer6 {
+  position:absolute;
+  width:1010px;
+  height:200px;
+  z-index:1;
+  left: 0px;
+  top: 978px;
+}
+.STYLE25 {font-weight: bold}
+-->
+</style>
+</head>
+<script type="text/javascript">
+
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-26059557-1']);
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+
+</script>
+
+<script event="onmouseover()" for="PagePicMap" id="oMapScript">
+ rangeDeltaX = 15;
+ rangeDeltaY = -13;
+ drawLine(event.srcElement);
+ </script>
+<span id="leveldiv" style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; Z-INDEX: 100; LEFT: 233px; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 210px; CURSOR: hand; POSITION: absolute; TOP: 123px; HEIGHT: 34px; BORDER-RIGHT-WIDTH: 0px" title="点击查看内容"></span>
+<body onload="initialize();initMPPage();">
+<table border="0" cellpadding="0" cellspacing="0" height="612" id="paper" width="409">
+<tr>
+<td height="620" rowspan="2" width="30"><img border="0" height="620" src="../../../tplimg/amrb_01.jpg" width="30"/></td>
+<td height="22" width="398"><img border="0" height="22" src="../../../tplimg/amrb_02.jpg" width="398"/></td>
+<td background="../../../tplimg" height="620" rowspan="2" width="12"><img border="0" height="620" src="../../../tplimg/amrb_03.jpg" width="12"/></td>
+</tr>
+<tr>
+<td height="570">
+<map name="pagepicmap"><area coords="8,15,325,15,325,296,142,296,142,304,281,304,281,384,8,384,8,241,147,241,147,238,8,238" href="content_1606174.htm" shape="polygon"/><area coords="288,209,398,209,398,476,239,476,239,409,280,409,280,294,288,294" href="content_1606175.htm" shape="polygon"/><area coords="8,388,265,388,265,468,92,468,92,405,88,405,88,468,8,468" href="content_1606176.htm" shape="polygon"/><area coords="8,478,384,478,384,596,8,596" href="content_1606177.htm" shape="polygon"/></map><img border="0" src="../../../page/1/2022-06-26/A01/38921656180054155.jpg" usemap="#PagePicMap"/> </td>
+</tr>
+<tr>
+<td background="" colspan="3" height="11"><img border="0" height="11" src="../../../tplimg/amrb_05.jpg" width="439"/></td>
+</tr>
+</table>
+<div id="Layer2">
+<table align="center" bgcolor="#D9D9D9" border="0" cellpadding="0" cellspacing="0" height="311" id="簡介" width="420">
+<tr>
+<td bordercolor="#D9D9D9" height="208"><h1 align="center" class="STYLE20"><br/>
+ 使用說明</h1>
+<p align="left"><span class="STYLE19">■ <strong class="style17">數字報紙簡介</strong></span><span class="prenext"><br/>
+ 數字報紙就是在保持紙質報紙原有版式的基礎上，同時又融合了網絡閱讀新聞的方便和快捷的新型網絡媒體。您在數字報紙的版面圖上點繫感興趣的文章，就可直接彈出此篇文章的新聞內容，她既保持了原汁原味的報紙版式，又融合了網上看新聞的方便和多樣，增添了讀者更多的閱讀趣味。 </span> </p>
+<p class="prenext"><span class="style17">■ <strong>數字報紙的结构</strong></span><br/>
+ 版次列表：列出當期報紙的所有版次，使用者可以方便地切換到別的版面進行瀏覽。<br/>
+ 標题導航：點擊“標题導航”，可以通覽當天報紙的全部文章標题。點擊標题，進入文章或圖片頁面。
+ 日曆检索：使用者可通过日曆方便地进入當前版次的歷史頁面。<br/>
+</p>
+</td>
+</tr>
+<tr>
+<td height="90" width="420"><!-- 广告位：首頁左側簡介下adv_13 420*90 -->
+<iframe frameborder="0" height="90" scrolling="no" src="../../../other-adv/adv13.htm" width="420"></iframe>
+</td></tr>
+</table>
+</div>
+<div id="Layer1">
+<table border="0" cellpadding="0" cellspacing="0" height="218" width="560">
+<tr>
+<td background="../../../tplimg" colspan="5" height="85"><a href="http://www.modaily.cn"><img height="85" longdesc="http://www.modaily.cn" src="../../../tplimg/logo1.jpg" width="560"/></a></td>
+</tr>
+<tr>
+<td align="left" background="../../../tplimg/bkg-01.jpg" class="greennav" colspan="5" height="25">    
+        <!--設為首頁開始-->
+<a class="date" href="#" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.macaodaily.com')"> <span style="font-size: 9pt"><font color="#297129">[ 設為首頁 ]</font></span></a> <span class="STYLE11">
+<!--設為首頁結束-->
+ |
+ <!--加入鏈接開始-->
+<script language="JavaScript">
+</script>
+</span>
+<script language="JavaScript"> function bookmarkit(){window.external.addFavorite('http://www.macaodaily.com','澳門日報數字報')}
+if (document.all)document.write('<a href="#" onClick="bookmarkit()"><span style="font-size: 9pt"><font color="#297129">[ 加入收藏 ]</font></span></a>')</script>
+<!--加入鏈接結束-->|
+        <a href="http://www.macaodaily.com">[ 返回主頁 ]</a> |
+ <a href="node_1.htm">[ 標題導航 ]</a></td>
+</tr>
+<tr>
+<td colspan="5" height="68" wigth="560"><!-- 广告位：首頁頂adv_11 560*68 -->
+<iframe frameborder="0" height="86" scrolling="no" src="../../../other-adv/adv11.htm" width="560"></iframe></td>
+</tr>
+<tr>
+<td height="33" width="128"><span class="STYLE2"> <span class="STYLE3">當前報紙日期：</span></span></td>
+<td class="STYLE2" colspan="4" width="432"><span class="STYLE3">
+<span class="STYLE2">
+ 2022
+ </span> 年
+ 
+ 6 月 
+ 26
+ 日　星期 
+ <font class="weekday">日</font>
+<span class="STYLE25"> </span></span></td>
+</tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" height="25" width="560">
+<tr>
+<td height="25" width="26"><div align="center"><img border="0" height="9" src="../../../tplimg/icon1.jpg" width="10"/></div></td>
+<td bgcolor="#DAF8BA" class="STYLE8" width="311">本版標題導航</td>
+<td bgcolor="#005500" class="whitenav" width="223"> <span class="STYLE9">版面導航</span></td>
+</tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" height="380" width="560">
+<tr>
+<td height="380" valign="top" width="340"><table border="0" cellpadding="1" cellspacing="0"><tbody> <tr> <td class="default" valign="top"> <img height="10" src="../../../tplimg/checkbox.gif" width="10"/> </td> <td class="default" valign="top"> <a href="content_1606174.htm"><div id="mp1606174" style="display:inline">全民留家今再自測</div></a> <br/><span class="prenext"><a href="content_1606174.htm"></a></span> </td> </tr> <tr> <td class="default" valign="top"> <img height="10" src="../../../tplimg/checkbox.gif" width="10"/> </td> <td class="default" valign="top"> <a href="content_1606175.htm"><div id="mp1606175" style="display:inline">藥房：抗原檢測包價穩量足</div></a> <br/><span class="prenext"><a href="content_1606175.htm"></a></span> </td> </tr> <tr> <td class="default" valign="top"> <img height="10" src="../../../tplimg/checkbox.gif" width="10"/> </td> <td class="default" valign="top"> <a href="content_1606176.htm"><div id="mp1606176" style="display:inline">兩百萬份抗原檢測劑供澳</div></a> <br/><span class="prenext"><a href="content_1606176.htm"></a></span> </td> </tr> <tr> <td class="default" valign="top"> <img height="10" src="../../../tplimg/checkbox.gif" width="10"/> </td> <td class="default" valign="top"> <a href="content_1606177.htm"><div id="mp1606177" style="display:inline">雅廉訪昨開展排洪管工程</div></a> <br/><span class="prenext"><a href="content_1606177.htm"></a></span> </td> </tr> </tbody> </table> </td>
+<td valign="top" width="204"> <div style="OVERFLOW-Y: scroll; WIDTH: 204px; HEIGHT: 388px">
+<table border="0" cellpadding="0" cellspacing="0" class="unnamed1" height="389" width="204">
+<tr>
+<td height="368" valign="top"> <table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody> <tr> <td align="left" class="default"> <a href="node_2.htm" id="pageLink">第A01版：澳聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_3.htm" id="pageLink">第A02版：澳聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_21.htm" id="pageLink">第A03版：澳聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_22.htm" id="pageLink">第A04版：澳聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_23.htm" id="pageLink">第A05版：港聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_24.htm" id="pageLink">第A06版：澳聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_25.htm" id="pageLink">第A07版：澳聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_26.htm" id="pageLink">第A08版：澳聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_27.htm" id="pageLink">第A09版：澳聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_28.htm" id="pageLink">第A10版：經濟</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_29.htm" id="pageLink">第A11版：經濟</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_30.htm" id="pageLink">第A12版：新園地</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_31.htm" id="pageLink">第B01版：要聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_32.htm" id="pageLink">第B02版：要聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_33.htm" id="pageLink">第B03版：要聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_41.htm" id="pageLink">第B04版：要聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_42.htm" id="pageLink">第B05版：要聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_43.htm" id="pageLink">第B06版：要聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_44.htm" id="pageLink">第B07版：要聞</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_45.htm" id="pageLink">第B08版：圖刋</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_46.htm" id="pageLink">第B09版：體育</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_47.htm" id="pageLink">第B10版：體育</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_48.htm" id="pageLink">第B11版：馬經</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_49.htm" id="pageLink">第B12版：馬經</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_50.htm" id="pageLink">第C01版：藝海</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_51.htm" id="pageLink">第C02版：藝海</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_52.htm" id="pageLink">第C03版：藝海</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_53.htm" id="pageLink">第C04版：藝海</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_54.htm" id="pageLink">第C05版：食經</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_55.htm" id="pageLink">第C06版：澳門街</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr> <td align="left" class="default"> <a href="node_56.htm" id="pageLink">第C07版：廣告</a></td> <td align="middle" nowrap="" width="40"></td></tr> <tr bgcolor="#e8e8e8"> <td align="left" class="default"> <a href="node_57.htm" id="pageLink">第C08版：閱讀時間</a></td> <td align="middle" nowrap="" width="40"></td></tr> </tbody></table> </td>
+</tr>
+</table>
+</div></td>
+</tr>
+</table>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" height="33" width="440">
+<tr>
+<td height="33" width="150"><span class="STYLE10">    
+ 第A01版：<strong>澳聞</strong>
+</span></td>
+<td class="STYLE10" width="287">     <a class="preart" href="node_3.htm"><span style="font-size:14px;font-family:webdings">4</span>下一版</a>  </td>
+</tr>
+</table>
+<div id="Layer3">
+<table border="0" cellpadding="0" cellspacing="0" height="250" width="320">
+<tr><td height="150">
+<!-- 广告位：首頁標題下方型廣告adv_14 320*250 -->
+<a href="../../../other/down1.html"><img height="250" longdesc="http://www.macaodaily.com/other/downl.html" src="../../../other-adv/Appdl.jpg" width="320"/></a>
+</td></tr>
+</table></div>
+<div id="Layer4">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td background="../../../tplimg/red_a1.jpg" class="default" style="PADDING-RIGHT: 3px; BORDER-TOP: #A90110 1px solid; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; BORDER-BOTTOM: #d2d2d2 1px solid"><div align="center"><strong class="whitenav"> 
+            按日期查閱</strong></div></td>
+</tr>
+</table>
+<form name="CLD" style="padding:0px;margin:0px;">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr align="center" class="default">
+<td bgcolor="#d2d2d2" colspan="7" height="15"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr align="center">
+<td align="left" nowrap=""><img height="11" onclick="turnpage(SY,0)" src="../../../tplimg/d1.gif" style="cursor:hand;" width="7"/></td>
+<td><select class="jumpmenu" name="SY" onchange="changeMPCld()">
+<script language="JavaScript">
+          for(i=2006;i<2051;i++)
+          document.write('<option>'+i+'</option>')
+       </script>
+</select> </td>
+<td><img height="11" onclick="turnpage(SY,1)" src="../../../tplimg/d.gif" style="cursor:hand;" width="7"/></td>
+<td align="center" nowrap=""><img height="11" onclick="turnpage(SM,0)" src="../../../tplimg/d1.gif" style="cursor:hand;" width="7"/></td>
+<td><select class="jumpmenu" name="SM" onchange="changeMPCld()">
+<script language="JavaScript">
+        <!-- 
+          for(i=1;i<13;i++) document.write('<option>'+i+'</option>')
+        //-->
+       </script>
+</select> </td>
+<td><img height="11" onclick="turnpage(SM,1)" src="../../../tplimg/d.gif" style="cursor:hand;" width="7"/></td>
+<td align="right" nowrap=""> </td>
+</tr>
+</table></td>
+</tr>
+<tr align="middle" bgcolor="#e8e8e8" class="default">
+<td align="center" class="default" height="27"><b><font face="Arial, Helvetica, sans-serif"> 日</font></b></td>
+<td align="center" class="default"><b><font face="Arial, Helvetica, sans-serif"> 一</font></b></td>
+<td align="center" class="default"><b><font face="Arial, Helvetica, sans-serif"> 二</font></b></td>
+<td align="center" class="default"><b><font face="Arial, Helvetica, sans-serif"> 三</font></b></td>
+<td align="center" class="default"><b><font face="Arial, Helvetica, sans-serif"> 四</font></b></td>
+<td align="center" class="default"><b><font face="Arial, Helvetica, sans-serif"> 五</font></b></td>
+<td align="center" class="default"><b><font face="Arial, Helvetica, sans-serif"> 六</font></b> </td>
+</tr>
+<script language="JavaScript">
+    <!--
+      var gNum;
+      for(i=0;i<6;i++) 
+      {
+        document.write('<tr align=center>');
+        for(j=0;j<7;j++) 
+        {
+          gNum = i*7+j;
+          document.write('<td bgcolor="#d2d2d2" class="default" align=center id="GD' + gNum +'" style="cursor: default;" width="14%"><a href="" id="CD' + gNum + '"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onMouseOver="mOvr(' + gNum +')" onMouseOut="mOut()" id="SD' + gNum +'"');
+          document.write('></font></span></a><br><font id="LD' + gNum + '" size=2 class=pt9 style=display:none></font></td>');
+        }
+        document.write('</tr>');
+      }
+    //-->
+   </script>
+</table></td>
+</tr>
+</table>
+</form>
+
+<tr>
+<td height="51"><script language="JavaScript">
+<!--
+document.write("<div id=detail style=position:absolute;width:300px;></div>");
+//-->
+ </script>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr align="center" bgcolor="#e8e8e8" class="default">
+<td height="32"><input maxlength="4" name="yearfield" size="1"/></td>
+<td>年</td>
+<td><input maxlength="2" name="monfield" size="1"/></td>
+<td>月</td>
+<td><input maxlength="2" name="dayfield" size="1"/></td>
+<td>日</td>
+<td><input class="px12" name="Submit" onclick="if(!checkDate()) return false;" style="BACKGROUND-COLOR: #e8e8d7" type="submit" value="查看"/></td>
+</tr>
+</table>
+</td></tr></div>
+<div id="Layer5">
+<div>
+<table border="0" cellpadding="0" cellspacing="0" height="95" width="565">
+<tr>
+<td align="center" height="90" valign="middle" width="560"><!-- 广告位：首頁右下半條adv_15 560*90 -->
+<iframe frameborder="0" height="90" scrolling="no" src="../../../other-adv/adv15.htm" width="560"></iframe>
+</td></tr>
+</table>
+</div>
+</div>
+<div id="Layer6">
+<table border="0" cellpadding="0" cellspacing="0" height="200" width="1010">
+<tr>
+<td align="center" bgcolor="#E8E8D7" height="100" valign="middle" width="1000">
+<!-- 广告位：首頁底部通欄adv_12 999*80 -->
+<iframe frameborder="0" height="90" scrolling="no" src="../../../other-adv/adv12.htm" width="990"></iframe>
+</td>
+</tr>
+<tr>
+<td align="center" bgcolor="#FF6600" height="100" valign="middle" width="1000"><iframe frameborder="0" height="86" scrolling="no" src="../../../other-adv/foot.htm" width="990"></iframe></td>
+</tr>
+</table>
+</div>
+</body>
+
+<!--enpproperty <founder-date>2022-06-26 23:59:43</founder-date><founder-pagenum>A01</founder-pagenum><founder-papername>澳门日报欢迎你－澳门日报</founder-papername><founder-type>2</founder-type><founder-pagepicurl>macaodaily/page/1/2022-06-26/A01/71631656180054155.jpg</founder-pagepicurl><founder-content>澳门日报</founder-content> /enpproperty-->

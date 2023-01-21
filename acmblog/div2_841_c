@@ -1,0 +1,100 @@
+知识点：
+(1)异或的逆运算是异或
+
+(2)前n个元素的前缀xor = 前n个元素前缀xor的xor
+设s[n] = a[1] ^ a[2] ^ ... ^ a[n]
+则s[1] ^ s[2] ^ ... ^ s[n] = a[1] ^ a[2] ^ ... ^ a[n]
+因为相同的元素会抵消
+
+(3)因子为奇数个的数字为完全平方数
+因为因数都是成对的，如果有奇数个因子说明有i * i的情况出现
+
+(4)一堆数进行异或和，其中最大值为mx，那么异或和最大不超过2 * mx - 1
+从二进制理解，最大不过mx，那么不存在一个数可以使得mx的最高位的高一位翻转为1
+
+题目div2 841 C
+给定一个数组，找出子列的异或和为偶数的数目
+
+思路：
+枚举前缀xor的右端点，去寻找左端点是否存在，然后计算有多少个满足条件左端点
+
+我们要寻找的是这样一个区间[l, r]:
+a[l] ^ ... ^ a[r] = t (t 是一个平方数)
+a[l] ^ ... ^ a[r] = s[l] ^ ... ^ s[r] = s[l - 1] ^ s[r] = t
+s[l - 1] = s[r] ^ t
+坑点：要记得只可以计算r前面的端点，不要提前计算所有端点的出现次数
+所以要一边读入一边处理
+
+s[l - 1] = 0, 说明s[r] = t 为平方数，这时候l=r，所以cnt[0]预设为1，表示只拿自己本身（仅限a[1]）的情况
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int a[200005], pre[200005], cnt[400005];
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int tt;
+    cin >> tt;
+    while (tt--) {
+        int n;
+        cin >> n;
+        memset(cnt, 0, sizeof(cnt));
+        cnt[0] = 1;
+        memset(pre, 0, sizeof(pre));
+        for (int i = 1; i <= n; i++) {
+            cin >> a[i];
+            pre[i] = pre[i - 1] ^ a[i];
+        }
+        long long ans = (long long) n * (n + 1) / 2;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j * j < 2 * n; j++) {
+                if ((pre[i] ^ (j * j)) < 2 * n) { // 避免越界
+                    ans -= cnt[pre[i] ^ (j * j)];
+                }
+            }
+            cnt[pre[i]]++;
+        }
+        cout << ans << '\n';
+    }   
+    return 0;
+}
+
+优化版代码：
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+int cnt[400005];
+ 
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int tt;
+    cin >> tt;
+    while (tt--) {
+        int n;
+        cin >> n;
+        memset(cnt, 0, sizeof(cnt));
+        cnt[0] = 1;
+        long long ans = (long long) n * (n + 1) / 2;
+        int pre = 0;
+        for (int i = 1; i <= n; i++) {
+            int a;
+            cin >> a;
+            pre ^= a;
+            for (int j = 0; j * j < 2 * n; j++) {
+                if ((pre ^ (j * j)) < 2 * n) {
+                    ans -= cnt[pre ^ (j * j)];
+                }
+            }
+            cnt[pre]++;
+        }
+        cout << ans << '\n';
+    }   
+    return 0;
+}
+
+专注于自己的学习就够了，因为别人进度比我快，我只会感到焦虑，况且按道理来说，华科的大部分人应该都比我优秀，只不过是一开始新生杯的成绩让我觉得我可以比得上华科的学生，其实只不过是因为当时他们是零基础，所以我才能在比赛当中获得这么好的成绩，不过其实也不是很好，因为我只是在萌新组拿了奖而已。这样想着的我没有参加寒假的acm训练营，在我的理性考虑下，认为acm很难搞，我没有天赋去搞这种东西，但是看到群里在打cf时，赛后一起讨论比赛题目的解法的时候，我的内心还是很向往。想去做有用的东西，比如华为的寒假训练营，这就是我想要的吗？实用主义就是我来到华科学计算机的原因，但是我发现对这些“有用”的知识没有什么兴趣，甚至感觉是自己逼着自己在学习，当前学完了，后续没有再学习的话，感觉很快就会忘掉，但是在刷cf的时候，我是兴奋的。其实是不是做自己喜欢的事情就可以了，我还很怀疑，所以我打算两个一起来吧，总不会亏的，什么都会一点，感觉还是可以生存的。

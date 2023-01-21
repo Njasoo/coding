@@ -1,0 +1,30 @@
+class Debug {
+  public:
+    template <typename T>
+    void debug(const vector<vector<T>>& variable) {
+        cerr << "debug(vector<vector>):" << endl;
+        cerr << "==================================================" << endl;
+        for (int i = 0; i < (int) variable.size(); i++) {
+            for (int j = 0; j < (int) variable[i].size(); j++) {
+                cerr << variable[i][j] << " \n"[j == (int) variable[i].size() - 1];
+            }
+        }
+        cerr << "==================================================" << endl;
+    }
+
+    template <typename T>
+    void debug(const vector<T>& variable_vector) {
+        int len_of_vector = (int) variable_vector.size();
+        cerr << "debug(vector):" << endl;
+        cerr << "==================================================" << endl;
+        for (int i = 0; i < len_of_vector; i++) {
+            cerr << variable_vector[i] << " \n"[i == len_of_vector - 1];
+        }
+        cerr << "==================================================" << endl;
+    }
+    
+    template <typename T>
+    void debug(const T& variable) {
+        cerr << "debug(singular variable): " << variable << endl;
+    }
+}deg;

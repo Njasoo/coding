@@ -1,0 +1,66 @@
+购买所有物品的总价格就是生成一棵树的总边权
+但是问题就是如果单买一件物品的话是没有边的
+所以建立一个虚点0，作为公共的根节点边权为a，这样单买一件物品的时候，也可以生成边
+然后无脑跑kruskal就行
+500 * 500 = 250000 所以我一开始开了4e4，开小了淦
+
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 505;
+const int M = 4e5 + 5;
+int a, b;
+int f[N];
+int leader(int x) {
+    while (f[x] != x) x = f[x] = f[f[x]];
+    return x;
+}
+void merge(int x, int y) {
+    x = leader(x);
+    y = leader(y);
+    f[y] = x;
+}
+bool same(int x, int y) {
+    return leader(x) == leader(y);
+}
+struct edge {
+    int u, v, w;
+}e[M];
+int cnt;
+void add_edge(int u, int v, int w) {
+    cnt++;
+    e[cnt].u = u;
+    e[cnt].v = v;
+    e[cnt].w = w;
+}
+long long ans = 0;
+void kruskal() {
+    for (int i = 0; i <= b; i++) f[i] = i;
+    sort(e + 1, e + 1 + cnt, [](edge i, edge j) {
+        return i.w < j.w;
+    });
+    for (int i = 1; i <= cnt; i++) {
+        if (same(e[i].u, e[i].v)) continue;
+        merge(e[i].u, e[i].v);
+        ans += e[i].w;
+    }
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cin >> a >> b;
+    for (int i = 1; i <= b; i++) {
+        for (int j = 1; j <= b; j++) {
+            int k;
+            cin >> k;
+            if (i < j && k) {
+                add_edge(i, j, k);
+            }
+        }
+    }   
+    for (int i = 1; i <= b; i++) {
+        add_edge(0, i, a);
+    }
+    kruskal();
+    cout << ans << '\n';
+    return 0;
+}

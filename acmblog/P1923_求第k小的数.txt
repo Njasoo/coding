@@ -1,0 +1,36 @@
+冰岩面试的心魔题终于让我过掉了，其实知道了快排后思想后就会很快知道解法
+但是不知道为什么我调代码调了半天，然后发现我对于快排还有地方有大漏洞
+就是应该先移动右指针，具体原因应该是因为标准值在左边
+
+然后这道题就变成二分查找题了，思路简单，具体代码实现有点坑
+
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 5e6 + 5;
+int a[N];
+int n, k;
+int qs(int l, int r) {
+  if (l == r && l == k) return a[k];
+  int i = l, j = r;
+  if (i < j) {
+    while (i < j) {
+      while (i < j && a[j] >= a[l]) j--;
+      while (i < j && a[i] <= a[l]) i++;
+      if (i == j) swap(a[i], a[l]);
+      else swap(a[i], a[j]);
+    }
+  }
+  if (k == i) return a[k];
+  if (k < i) return qs(l, i - 1);
+  else return qs(j + 1, r);
+}
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cin >> n >> k;
+  for (int i = 0; i < n; i++) {
+    cin >> a[i];
+  }
+  cout << qs(0, n - 1) << '\n';
+  return 0;
+}

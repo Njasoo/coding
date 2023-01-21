@@ -1,0 +1,51 @@
+生成k条边的最大生成树即可
+注意是k条不是m条，我犯了这个错
+
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e5 + 5;
+int n, m, k;
+struct Edge {
+    int from, to, cost;
+}e[N];
+int f[N];
+int leader(int x) {
+    while (x != f[x]) x = f[x] = f[f[x]];
+    return x;
+}
+void merge(int x, int y) {
+    x = leader(x);
+    y = leader(y);
+    f[y] = x;
+}
+bool same(int x, int y) {
+    return leader(x) == leader(y);
+}
+long long ans = 0;
+int cnt = 0;
+void kruskal() {
+    for (int i = 1; i <= n; i++) {
+        f[i] = i;
+    }
+    sort(e + 1, e + 1 + m, [&](Edge i, Edge j) {
+        return i.cost > j.cost;
+    });
+    for (int i = 1; i <= m; i++) {
+        if (same(e[i].from, e[i].to)) continue;
+        merge(e[i].from, e[i].to);
+        cnt++;
+        ans += e[i].cost;
+        if (cnt == k) break;
+    }
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cin >> n >> m >> k;   
+    for (int i = 1; i <= m; i++) {
+        cin >> e[i].from >> e[i].to >> e[i].cost;
+    }
+    kruskal();
+    cout << ans << '\n';
+    return 0;
+}

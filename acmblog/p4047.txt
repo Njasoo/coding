@@ -1,0 +1,66 @@
+这题其实是贪心，虽然看到的当下肯定会想到二分（用了也可以）
+就也是最小生成树的思想，边权越小的尽量成为一个部落，然后剩下的边权中最小值就是答案
+
+有坑点就是，连了n-k个部落，是下一个未连边的边权是答案，而不是单纯的下一条边权就是答案，搞了我好久
+
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e3 + 5;
+const int M = 1e6 + 5;
+struct edge {
+    int u, v;
+    double w;
+}e[M];
+int cnt;
+void add_edge(int u, int v, double w) {
+    cnt++;
+    e[cnt].u = u;
+    e[cnt].v = v;
+    e[cnt].w = w;
+}
+int n, k;
+int f[N];
+int leader(int x) {
+    while (f[x] != x) x = f[x] = f[f[x]];
+    return x;
+}
+void merge(int x, int y) {
+    x = leader(x);
+    y = leader(y);
+    f[y] = x;
+}
+bool same(int x, int y) {
+    return leader(x) == leader(y);
+}
+pair<int, int> pos[N];
+double get_dis(int i, int j) {
+    return sqrt((pos[i].first - pos[j].first) * (pos[i].first - pos[j].first) + (pos[i].second - pos[j].second) * (pos[i].second - pos[j].second));
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cin >> n >> k;   
+    for (int i = 1; i <= n; i++) {
+        cin >> pos[i].first >> pos[i].second;
+    }
+    for (int i = 1; i < n; i++) {
+        for (int j = i + 1; j <= n; j++) {
+            add_edge(i, j, get_dis(i, j));
+        }
+    }
+    for (int i = 1; i <= n; i++) f[i] = i;
+    sort(e + 1, e + 1 + cnt, [&](edge i, edge j) {
+        return i.w < j.w;
+    });
+    int tot = 0;
+    for (int i = 1 ; i <= cnt && tot <= n - k; i++) {
+        if (same(e[i].u, e[i].v)) continue;
+        if (tot == n - k) {
+            cout << fixed << setprecision(2) << e[i].w << '\n';
+            return 0;
+        }
+        merge(e[i].u, e[i].v);
+        tot++;
+    }
+    return 0;
+}

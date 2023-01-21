@@ -1,0 +1,92 @@
+并查集+floyd
+
+不同的牧区归类在不同的牧场，很明显的连通块，我喜欢用并查集，当然dfs染色法也可以
+
+求直径的方法就是用floyd跑任意两点最短路然后记录其中的最大值
+这里一开始我有一个顾虑的地方就是能不能直接对所有的点跑，答案是可以的，我本来以为这样直接来会让不在同一个牧场的两个点连起来了，但是其实不会，因为两个点没有在同一个连通块，所以无论怎么跑，它们之间的距离都是无限大，根本不会被更新。
+
+比较麻烦的一个地方就是如何找到连接任意两点后的新直径，只能搞一个新的数组记录连接到i点的最长路，然后最短的最长最短路就用max_sp[i] + dis[i][j] + max_sp[j]来更新
+
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 505;
+const double inf = (double) 1e9;
+int n;
+pair<int, int> t[N];
+int f[N];
+double max_sp[N];
+double d[N], dis[N][N];
+
+int leader(int x) {
+    while (f[x] != x) x = f[x] = f[f[x]];
+    return x;
+}
+
+void merge(int x, int y) {
+    x = leader(x);
+    y = leader(y);
+    f[y] = x;
+}
+
+bool same(int x, int y) {
+    return leader(x) == leader(y);
+}
+
+double get_dis(int i, int j) {
+    return sqrt((t[i].first - t[j].first) * (t[i].first - t[j].first) + (t[i].second - t[j].second) * (t[i].second - t[j].second));
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> t[i].first >> t[i].second;
+        f[i] = i;
+    } 
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            dis[i][j] = inf;
+        }
+    }
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            char ch;
+            cin >> ch;
+            if (ch == '1' || i == j) {
+                dis[i][j] = get_dis(i, j);
+                merge(i, j); // 同一个牧场
+            }
+        }
+    }
+    // floyd跑任意两点最短路
+    for (int k = 1; k <= n; k++) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                dis[i][j] = min(dis[i][j], dis[i][k] + dis[k][j]);
+            }
+        }
+    }
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (dis[i][j] < inf) { // 小于inf说明有路
+                max_sp[i] = max(max_sp[i], dis[i][j]); // 同一个牧场连接到i牧区的最长的最短路
+            }
+        }
+        d[leader(i)] = max(d[leader(i)], max_sp[i]); // 一点小技巧
+    }
+    double ans = inf;
+    for (int i = 1; i < n; i++) {
+        for (int j = i + 1; j <= n; j++) {
+            if (!same(i, j)) { // 不是同一个牧区，考虑把它们连起来
+                // 遍历任意两个点，取最短路的最大值，记得要和原本两个牧场的直径作比较
+                double max_d = max(max(d[leader(i)], d[leader(j)]), max_sp[i] + get_dis(i, j) + max_sp[j]);
+                // cerr << "max_d: " << max_d << endl;
+                ans = min(ans, max_d);
+            }
+        }
+    }
+    cout << fixed << setprecision(6) << ans << '\n';
+    return 0;
+}

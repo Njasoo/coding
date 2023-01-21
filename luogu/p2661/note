@@ -1,0 +1,4 @@
+the solution in test.cpp is acceptable, but it is not fast enough.
+
+noticed that, the out-degree of every point is 1, so it is impossible to have more than a circle in this graph. So in one
+search, points that have been visited, we don't need to search it again because it has no possibility to form another ring.

@@ -1,0 +1,19 @@
+博弈论，猜就对了
+
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int n;
+    while (cin >> n) {
+        if (!n) break;
+        // 抢到第n ^ 2 - 1个格子, 因为他们很聪明，所以他们一定能抢到（？）
+        if (n % 2 == 0) {
+            cout << "Alice\n";
+        } else {
+            cout << "Bob\n";
+        }
+    }   
+    return 0;
+}

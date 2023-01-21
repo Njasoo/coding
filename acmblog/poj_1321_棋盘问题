@@ -1,0 +1,50 @@
+这一题本来以为不需要dfs的，以为只是简单的组合问题，后来才看到题目有任意两个棋子不能放在同行同列的要求，这也是这一题只能用搜索的原因
+
+下面的关键代码就是dfs(x + 1, cnt)，这表示这一行选择不放，然后继续进行搜索
+
+然后有一个坑点就是，cnt++后再进行递归，poj会报错导致WA，而在传递参数传入cnt + 1就AC了，我猜这应该是poj版本太老的问题，毕竟它连万能头都不能用，我本地测试是过案例的
+
+下面是ac代码
+
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+#include<cmath>
+using namespace std;
+const int N = 10;
+int n, k, ans;
+char f[N][N];
+bool vis[N];
+void dfs(int x, int cnt) {
+    if (cnt == k) {
+        ans++;
+        return;
+    }
+    if (x == n + 1) return;
+    dfs(x + 1, cnt);
+    for (int j = 1; j <= n; j++) {
+        if (!vis[j] && f[x][j] == '#') {
+            vis[j] = 1;
+            // cnt++;
+            // cerr << "cnt: " << cnt << endl;
+            dfs(x + 1, cnt + 1);
+            vis[j] = 0;
+        }
+    }
+}
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);   
+    while (cin >> n >> k) {
+        if (n == -1 && k == -1) break;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                cin >> f[i][j];
+            }
+        }
+        ans = 0;
+        dfs(1, 0);
+        cout << ans << '\n';
+    }
+    return 0;
+}

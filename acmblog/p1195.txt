@@ -1,0 +1,55 @@
+这题其实是贪心，题意就是把n个连通块变成k个，每连一次边都少一个连通块
+不连边的自成一个连通块，贪心思想：连n - k条边，n-k个云变成一棵树
+代价就是边权之和，所以最小代价就是最小生成树
+特别简单这道题，我用5分钟就想到了
+
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e3 + 5;
+const int M = 1e4 + 5;
+int n, m, k;
+struct edge {
+    int u, v, w;
+}e[M];
+int f[N];
+int leader(int x) {
+    while (x != f[x]) x = f[x] = f[f[x]];
+    return x;
+}
+void merge(int x, int y) {
+    x = leader(x);
+    y = leader(y);
+    f[y] = x;
+}
+bool same(int x, int y) {
+    return leader(x) == leader(y);
+}
+int tot, ans;
+void kruskal() {
+    for (int i = 1; i <= n; i++) f[i] = i;
+    sort(e + 1, e + 1 + m, [&](edge i, edge j) {
+        return i.w < j.w;
+    });
+    for (int i = 1; i <= m && tot < n - k; i++) {
+        if (same(e[i].u, e[i].v)) continue;
+        merge(e[i].u, e[i].v);
+        tot++;
+        ans += e[i].w;
+    }
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cin >> n >> m >> k;
+    for (int i = 1; i <= m; i++) {
+        cin >> e[i].u >> e[i].v >> e[i].w;
+    }
+    // 有n棵云，每两个相连等于少了一个棉花糖，现在要k个棉花糖，所以连n-k次
+    kruskal();
+    if (tot == n - k) {
+        cout << ans << '\n';
+    } else {
+        cout << "No Answer\n";
+    }
+    return 0;
+}

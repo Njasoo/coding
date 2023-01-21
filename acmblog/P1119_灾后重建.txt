@@ -1,0 +1,53 @@
+floyd，因为有多次询问，听说dijkstra去掉堆优化也能过，应该是边太多的原因
+为什么这题可以边更新边处理询问呢，因为题目居然保证t是不下降的
+我草，那直接像动态规划那样更新它就行了
+
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 205;
+int dis[N][N];
+int t[N];
+int n, m;
+void update(int k) {
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      dis[i][j] = min(dis[i][j], dis[i][k] + dis[k][j]);
+    }
+  }
+}
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  memset(dis, 0x3f, sizeof(dis));
+  for (int i = 0; i < n; i++) {
+    dis[i][i] = 0;
+  }
+  cin >> n >> m;
+  for (int i = 0; i < n; i++) {
+    cin >> t[i];
+  }
+  for (int i = 1; i <= m; i++) {
+    int x, y, z;
+    cin >> x >> y >> z;
+    dis[x][y] = dis[y][x] = z;
+  }
+  int q;
+  cin >> q;
+  int now = 0;
+  for (int i = 1; i <= q; i++) {
+    int x, y, nowt;
+    cin >> x >> y >> nowt;
+    while (t[now] <= nowt && now < n) { // 更新在时间内的道路
+      update(now);
+      now++;
+    }
+    if (t[x] > nowt || t[y] > nowt) {
+      cout << "-1\n";
+    } else if (dis[x][y] == 0x3f3f3f3f) {
+      cout << "-1\n";
+    } else {
+      cout << dis[x][y] << '\n';
+    }
+  }
+  return 0;
+}

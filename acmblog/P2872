@@ -1,0 +1,76 @@
+最小生成树板子题
+记得开long long
+然后因为边数组长度忘记开M，所以搞了好久
+这题用kruskal会很方便，prim已经不想再打了，我觉得即使是稠密图kruskal也挺快的
+题目已经提供的边就merge两个点
+剩下的按照正常处理
+然后对所有的点都建立边，然后无脑开跑
+
+#include <bits/stdc++.h>
+using namespace std;
+const int N = (int) 1e3 + 5;
+const int M = 2e6 + 5;
+pair<long long, long long> pos[N];
+struct Edge {
+  int from, to;
+  long double cost;
+}e[M];
+long double get_dis(int i, int j) {
+  return sqrt((pos[i].first - pos[j].first) * (pos[i].first - pos[j].first) + (pos[i].second - pos[j].second) * (pos[i].second - pos[j].second));
+}
+int n, m;
+int f[N];
+int leader(int x) {
+  while (f[x] != x) x = f[x] = f[f[x]];
+  return x;
+}
+void merge(int x, int y) {
+  x = leader(x);
+  y = leader(y);
+  f[y] = x;
+}
+bool same(int x, int y) {
+  return leader(x) == leader(y);
+}
+bool cmp(Edge i, Edge j) {
+  return i.cost < j.cost;
+}
+long double ans = 0;
+int cnt = 0;
+void kruskal() {
+  sort(e + 1, e + 1 + cnt, cmp);
+  for (int i = 1; i <= cnt; i++) {
+    int u = e[i].from;
+    int v = e[i].to;
+    long double d = e[i].cost;
+    if (same(u, v)) continue;
+    merge(u, v);
+    ans += d;
+  }
+}
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cin >> n >> m;
+  for (int i = 1; i <= n; i++) {
+    cin >> pos[i].first >> pos[i].second;
+    f[i] = i;
+  }
+  for (int i = 1; i <= m; i++) {
+    int u, v;
+    cin >> u >> v;
+    merge(u, v);
+  }
+  for (int i = 1; i < n; i++) {
+    for (int j = i + 1; j <= n; j++) {
+//      cerr << "cnt: " << cnt << endl;
+      cnt++;
+      e[cnt].from = i;
+      e[cnt].to = j;
+      e[cnt].cost = get_dis(i, j);
+    }
+  }
+  kruskal();
+  cout << fixed << setprecision(2) << ans << '\n';
+  return 0;
+}
