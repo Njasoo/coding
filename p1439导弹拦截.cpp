@@ -30,7 +30,7 @@ int main() {
     memset(dp, 0x3f, sizeof(dp));
     ans = 0;
     for (int i = 1; i <= n; i++) {
-        int l = 1, r = i - 1;
+        int l = 0, r = i - 1;
         int pos = 0;
         while (l <= r) {
             int mid = (l + r) >> 1;
