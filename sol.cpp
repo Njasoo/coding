@@ -1,26 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
-int m[105], t[105];
-int dp[105][205][205];
+const int N = 105;
+double change[N];
+double dp[N][2];
+// dp[i][0]: 持有美金最大数
+// dp[i][1]: 持有马克最大数
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int n, M, T;
-    cin >> n >> M >> T;
+    int n;
+    cin >> n;
     for (int i = 1; i <= n; i++) {
-        cin >> m[i] >> t[i];
+        cin >> change[i];
     }   
-    for (int i = 1; i <= n; i++) {
-        for (int j = 0; j <= M; j++) {
-            for (int k = 0; k <= T; k++) {
-                if (j >= m[i] && k >= t[i]) {
-                    dp[i][j][k] = max(dp[i - 1][j][k], dp[i - 1][j - m[i]][k - t[i]] + 1);
-                } else {
-                    dp[i][j][k] = dp[i - 1][j][k];
-                }
-            }
-        }
+    dp[1][0] = 100.0;
+    dp[1][1] = change[1];
+    for (int i = 2; i <= n; i++) {
+        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] * 100.0 / change[i]);
+        dp[i][1] = max(dp[i - 1][0] * change[i] / 100.0, dp[i - 1][1]);
     }
-    cout << dp[n][M][T] << '\n';
+    cout << fixed << setprecision(2) << dp[n][0] << '\n';
     return 0;
 }
