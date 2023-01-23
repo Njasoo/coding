@@ -1,50 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int MN = 1e5;
 const int N = 1e5 + 5;
-const int INF = 0x3f3f3f3f;
-int n, m;
-int a[N], cnt[N];
-vector<int> factors[N];
+int a[N];
+int power(int u, int v) {
+    int res = 1;
+    while (v) {
+        if (v & 1) res = res * u;
+        v >>= 1;
+        u *= u;
+    }
+    return res;
+}
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    for (int i = 1; i <= MN; i++) {
-        for (int j = i; j <= MN; j += i) {
-            factors[j].push_back(i);
-        }
+    int n, k;
+    cin >> n >> k;       
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
     }
-    int tt;
-    cin >> tt;
-    while (tt--) {
-        memset(cnt, 0, sizeof(cnt));
-        cin >> n >> m;
-        for (int i = 1; i <= n; i++) {
-            cin >> a[i];
-        }
-        sort(a + 1, a + 1 + n);
-        int j = 1, tot = 0;
-        int ans = INF;
-        for (int i = 1; i <= n; i++) {
-            j = max(j, i);
-            while (j <= n && tot < m) {
-                for (int factor : factors[a[j]]) {
-                    if (factor > m) break;
-                    cnt[factor]++;
-                    if (cnt[factor] == 1) tot++;
-                }
-                j++;
-            }
-            if (tot < m) break;
-            ans = min(ans, a[j - 1] - a[i]);
-            for (int factor : factors[a[i]]) {
-                if (factor > m) break;
-                cnt[factor]--;
-                if (cnt[factor] == 0) tot--;
+    int ans = 0;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (i != j) {
+                int len = (int) log10(a[j]) + 1;
+                int ta_i = a[i];
+                ta_i *= power(10, len);
+                ta_i += a[j];
+                if (ta_i <= k) ans++;
             }
         }
-        if (ans == INF) cout << "-1\n";
-        else cout << ans << '\n';
     }
+    cout << ans << '\n';
     return 0;
 }
