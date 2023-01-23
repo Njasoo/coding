@@ -1,47 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 1e5 + 5;
-const int INF = 0x3f3f3f3f;
-int n, m;
-string ss[N];
-map<string, bool> want;
-map<string, int> cnt;
-int ans1, ans2 = INF;
+const int N = 1e3 + 5;
+int a[N], ans[N];
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
+    int n;
     cin >> n;
     for (int i = 1; i <= n; i++) {
-        string s;
-        cin >> s;
-        want[s] = 1;
+        cin >> a[i];
+    }       
+    sort(a + 1, a + 1 + n);
+    int cnt = 0;
+    for (int i = 1, j = n; i < j; i++, j--) {
+        ans[++cnt] = a[j];
+        ans[++cnt] = a[i];
     }
-    cin >> m;
-    for (int i = 1; i <= m; i++) {
-        cin >> ss[i];
-        if (want[ss[i]] == 1 && ++cnt[ss[i]] == 1) ans1++;
+    if (n % 2) {
+        ans[++cnt] = a[(n + 1) / 2];
     }
-    cnt.clear();
-    cout << ans1 << '\n';
-    int tot = 0;
-    for (int i = 1, j = 1; i <= m; i++) {
-        while (j <= m && tot < ans1) {
-            if (want[ss[j]] == 1) {
-                if (++cnt[ss[j]] == 1) tot++;
-            }
-            j++;
-        }
-        if (tot == ans1) ans2 = min(ans2, j - i);
-        else break;
-        if (want[ss[i]] == 1) {
-            cnt[ss[i]]--;
-            if (cnt[ss[i]] == 0) tot--;
-        }
-    }
-    if (ans1 == 0) {
-        cout << 0 << '\n';
-    } else {
-        cout << ans2 << '\n';
+    for (int i = 1; i <= n; i++) {
+        cout << ans[i] << '\n';
     }
     return 0;
 }
