@@ -1,26 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 1e3 + 5;
-int a[N], ans[N];
+// x 是a1的倍数，x是b1的约数，根号枚举b1的约数,判断是否符合条件
+// 本来打算同时枚举a1的倍数，结果超时了
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     int n;
     cin >> n;
     for (int i = 1; i <= n; i++) {
-        cin >> a[i];
+        long long a0, a1, b0, b1;
+        cin >> a0 >> a1 >> b0 >> b1;
+        int ans = 0;
+        for (long long factor = 1; factor * factor <= b1; factor++) {
+            if (b1 % factor == 0) {
+                if (__gcd(factor, a0) == a1 && factor * b0 / __gcd(factor, b0) == b1) ans++;
+                long long factor2 = b1 / factor;
+                if (factor == factor2) break; // 不要重复计算
+                if (__gcd(factor2, a0) == a1 && factor2 * b0 / __gcd(factor2, b0) == b1) ans++;
+            }
+        }
+        cout << ans << '\n';
     }       
-    sort(a + 1, a + 1 + n);
-    int cnt = 0;
-    for (int i = 1, j = n; i < j; i++, j--) {
-        ans[++cnt] = a[j];
-        ans[++cnt] = a[i];
-    }
-    if (n % 2) {
-        ans[++cnt] = a[(n + 1) / 2];
-    }
-    for (int i = 1; i <= n; i++) {
-        cout << ans[i] << '\n';
-    }
     return 0;
 }
