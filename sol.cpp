@@ -1,27 +1,41 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-const int N = 105;
-int a[N], b[N];
-int main() {
+#define db(x) cerr<<#x<<"="<<x<<endl;
+const int MOD=998244353;
+const int N=1e6+5;
+const int MX=2005;
+long long dp[MX][MX],a[N];
+void init(){
+    for(int i=0;i<MX;i++){
+        dp[i][0]=1;
+        dp[i][1]=i;
+    }
+    for(int i=1;i<MX;i++){
+        for(int j=1;j<MX;j++){
+            dp[i][j]=(dp[i-1][j]+dp[i-1][j-1])%MOD;
+        }
+    }
+}
+int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int tt;
-    cin >> tt;
-    while (tt--) {
-        int n, k;
-        cin >> n >> k;
-        for (int i = 1; i <= n; i++) {
-            cin >> a[i];
+    init();
+    int n;
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+    }
+    int q;
+    cin>>q;
+    for(int i=1;i<=q;i++){
+        int x,y;
+        cin>>x>>y;
+        long long ans=0;
+        for(int j=0;j<=x;j++){
+            ans=(ans+dp[x][j]*a[y])%MOD;
+            y=y%n+1;
         }
-        sort(a + 1, a + 1 + n, greater<int>());
-        long long ans = 0;
-        for (int i = 1; i <= k; i++) {
-            ans += a[i + k] / a[i];
-        }
-        for (int i = 2 * k + 1; i <= n; i++) {
-            ans += a[i];
-        }
-        cout << ans << '\n';
-    }       
+        cout<<ans<<'\n';
+    }
     return 0;
 }
