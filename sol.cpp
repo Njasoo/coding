@@ -1,42 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define db(x) cerr<<#x<<"="<<x<<endl;
-//从每一个黑点开始染色，更新最短距离,加一点点剪枝
-const int N=2e5+5;
-int n,ans;
-int c[N],dis[N];
-vector<int> p[N];
-void update(int u,int val){
-    if(val>=dis[u]||val>=ans) return;
-    dis[u]=val;
-    for(int v:p[u]) update(v,val+1);
-}
+//a+b=a^b+2(a&b)->x=2(a&b),so x%2=0
+//set a&b=y,so a+b=x+2y->y=x/2,显然a=x,b=2y是不行的，因为这样a^b=0
+//a=x+y=3x/2,b=y;
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
     int tt;
     cin>>tt;
     while(tt--){
-        cin>>n>>c[0];
-        for(int i=1;i<=n;i++){
-            p[i].clear();
-            dis[i]=n-1;
+        int x;
+        cin>>x;
+        if(x%2){
+            cout<<"-1\n";
+            continue;
         }
-        for(int i=1;i<n;i++) cin>>c[i];
-        for(int i=1;i<n;i++){
-            int u,v;
-            cin>>u>>v;
-            p[u].push_back(v);
-            p[v].push_back(u);
+        if(((3*x/2)^(x/2))==x){
+            cout<<3*x/2<<' '<<x/2<<'\n';
+        }else{
+            cout<<"-1\n";
         }
-        ans=n-1;
-        update(c[0],0);
-        for(int i=1;i<n;i++){
-            ans=min(ans,dis[c[i]]);
-            if(ans>1) update(c[i],0);//ans随着染色不打断减小
-            cout<<ans<<' ';
-        }
-        cout<<'\n';
-    }       
+    }
     return 0;
 }
