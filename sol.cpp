@@ -1,26 +1,36 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define db(x) cerr<<#x<<"="<<x<<endl;
-//a+b=a^b+2(a&b)->x=2(a&b),so x%2=0
-//set a&b=y,so a+b=x+2y->y=x/2,显然a=x,b=2y是不行的，因为这样a^b=0
-//a=x+y=3x/2,b=y;
+const int N=2e5+5;
+int n,m;
+int f[N];
+int leader(int x){
+    while(x!=f[x]) x=f[x]=f[f[x]];
+    return x;
+}
+bool merge(int x,int y){
+    x=leader(x);
+    y=leader(y);
+    if(x==y) return 0;
+    f[y]=x;
+    return 1;
+}
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int tt;
-    cin>>tt;
-    while(tt--){
-        int x;
-        cin>>x;
-        if(x%2){
-            cout<<"-1\n";
-            continue;
-        }
-        if(((3*x/2)^(x/2))==x){
-            cout<<3*x/2<<' '<<x/2<<'\n';
-        }else{
-            cout<<"-1\n";
-        }
+    cin>>n>>m;
+    bool flag=1;
+    for(int i=1;i<=n;i++) f[i]=i;
+    for(int i=1;i<=m;i++){
+        int u,v;
+        cin>>u>>v;
+        if(!merge(u,v)) flag=0;
     }
+    int cnt=0;
+    for(int i=1;i<=n;i++){
+        if(f[i]==i) cnt++;
+    }
+    if(cnt!=1) flag=0;
+    cout<<(flag?"Yes":"No")<<'\n';
     return 0;
 }
