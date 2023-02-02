@@ -1,12 +1,13 @@
-from math import *
+def factorial(n):
+    res = 1
+    for i in range(1, n + 1):
+        res *= i
+    return res
 
-for (x1,y1,x2,y2) in [(48.87,-2.33,37.8,-122.4),(40.89,116.50,37.8,-122.4),(40.89,116.50,48.87,-2.33)]:
-    # 请在下面编写代码
-    R = 69.1105 * 1.609
-    x1 *= 180 / pi
-    x2 *= pi / 180
-    y1 *= pi / 180
-    y2 *= pi / 180
-    dist = R * acos(sin(x1) * sin(x2) + cos(x1) * cos(x2) * cos(y1 - y2))
-    # 请不要修改下面的代码
-    print(dist)
+ans = factorial(26) / factorial(10) / factorial(16)
+print(ans)
+
+class person:
+    __init__(self):
+        self.num
+        
