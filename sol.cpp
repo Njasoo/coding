@@ -1,70 +1,40 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define db(x) cerr << #x << " = " << x << endl
-// a中最多10个不同的字母，假设a中不同字母的数量是m
-// 从中选k个应该被替换的字母总数为mCk，最多的情况就是10C5 = 252（草，这个条件被忽略了一晚上）
-// 252 * O(n) -> 爆搜哪几个字母应该被加入集合q
-// 学那么多算法有啥用，最基础的都不会用(-_-)，贪心做多了，久久碰到搜索都看不出来了
-// 怎么超时了？
-// 好像是我把组合搞成排列了，有很多情况重复计算了（是的，然后时间复杂度就变成O(n * m!)...理所当然地炸了）
-// 连组合递归都忘记怎么写了，重新回想怎么写组合递归，坐标递增？
-int n, k, dis, last;
-long long ans;
-string a, b;
-char canuse[15];
-bool vis[26];
-void dfs(int now) {
-    if (now == k + 1 || now == dis + 1) {
-        long long cnt = 0;
-        string tempa = a;
-        for (int i = 1; i <= n; i++) {
-            if (vis[tempa[i] - 'a']) {
-                tempa[i] = b[i];
-            }
-        }
-        for (int i = 1; i <= n; i++) {
-            int j = i;
-            while (tempa[j] == b[j] && j <= n) {
-                j++;
-            }
-            long long len = j - i;
-            i = j;
-            cnt += len * (len + 1) / 2; // 爆了，还是long long安全
-        }
-        ans = max(ans, cnt);
-        return;
+// dp[i][j]: a的前i个字符变成b的前j个字符所需的最小步数
+// 先考虑搜索吧，毕竟我的dp永远只会模板，正推应该是不可能退出来了，记搜写出来，dp应该就不难了，前提我这次要完全理解它
+// 状态难想，不过越少越好，尽量往简单的去想，虽然想出来了也不会推
+const int N = 2005;
+int dp[N][N];
+string A, B;
+int solve(int lena, int lenb) {
+    if (dp[lena][lenb] != -1) return dp[lena][lenb];
+    // 假设长度是不断减少的，那最后什么是可以确定的
+    if (lena == 0) return dp[lena][lenb] = lenb; // 添加lenb个，只有这种方法了
+    if (lenb == 0) return dp[lena][lenb] = lena; // 删除lena个，也是只有这种方法
+    // 如果A[lena] ！= B[lenb]，可以先试一下更改A[lena]等于B[lenb]，然后比较一下哪种方法更好
+    int res;
+    if (A[lena] == B[lenb]) {
+        res = solve(lena - 1, lenb - 1);
+    } else {
+        res = solve(lena - 1, lenb - 1) + 1;
     }
-    for (int i = last + 1; i <= dis; i++) {
-        if (!vis[canuse[i] - 'a']) {
-            vis[canuse[i] - 'a'] = 1;
-            int temp_last = last;
-            last = i;
-            dfs(now + 1);
-            last = temp_last;
-            vis[canuse[i] - 'a'] = 0;
-        }
-    }
+    // 最难的一步，想想还有什么操作可以比较，添加和删除
+    // 下面是经典的(i - 1, j - 1), (i, j - 1), (i - 1, j)环节，虽然想不出来，但是可以尝试理解
+    // A的前i - 1个字符变成B的前j个，需要多少步，如果前i - 1已经可以变成B，那么最后一个就是多余的，需要删掉，所以加1
+    // A的前i个字符变成B的前j-1个，那么现在B多了一个，所以需要再添加一项，这是添加的部分
+    // 这样的话，更改，删除和添加的操作都有了，那么就来贪心地比较他们的步数取最小值
+    return dp[lena][lenb] = min(min(solve(lena, lenb - 1) + 1, solve(lena - 1, lenb) + 1), res);
 }
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int tt = 1;
-    cin >> tt;
-    while (tt--) {
-        last = 0;
-        ans = 0;
-        dis = 0;
-        cin >> n >> k >> a >> b;
-        a = ' ' + a, b = ' ' + b;
-        for (int i = 1; i <= n; i++) {
-            if (!vis[a[i] - 'a']) {
-                vis[a[i] - 'a'] = 1;
-                canuse[++dis] = a[i];
-            }
-        }
-        memset(vis, 0, sizeof(vis)); // 重复利用
-        dfs(1);
-        cout << ans << '\n';
-    }   
+    memset(dp, -1, sizeof(dp));
+    cin >> A >> B;
+    int lena = A.size();
+    int lenb = B.size();
+    A = ' ' + A;
+    B = ' ' + B;
+    cout << solve(lena, lenb) << '\n';
     return 0;
 }
