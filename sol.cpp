@@ -1,20 +1,37 @@
 #include <bits/stdc++.h>
-using namespace std;
-#define db(x) cerr << #x << " = " << x << endl
-const int MN = 1e7;
-long long dp[MN * 2 + 5];
+#define debug(x) std::cerr << #x << " = " << x << std::endl
+constexpr int MN = 1E5;
+std::map<std::string, int> id;
+std::string s[MN + 5], t[MN + 5];
+int f[MN + 5];
+int leader(int x) {
+    while (f[x] != x) x = f[x] = f[f[x]];
+    return x;
+}
+bool merge(int x, int y) {
+    x = leader(x);
+    y = leader(y);
+    if (x == y) return false;
+    f[y] = x;
+    return true;
+}
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    memset(dp, 0x3f, sizeof(dp));
-    int n, x, y;
-    cin >> n >> x >> y;
-    dp[0] = 0;
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    int n;
+    std::cin >> n;
+    std::iota(f + 1, f + 1 + n, 1);
     for (int i = 1; i <= n; i++) {
-        dp[i] = min(dp[i], dp[i - 1] + x);
-        dp[i] = min(dp[i], dp[i + 1] + x);
-        dp[i * 2] = min(dp[i * 2], dp[i] + y);
+        std::cin >> s[i] >> t[i];
+        id[s[i]] = i;
     }
-    cout << dp[n] << '\n';
+    bool flag = true;
+    for (int i = 1; i <= n; i++) {
+        if (!merge(id[s[i]], id[t[i]])) {
+            flag = false;
+            break;
+        }
+    }
+    std::cout << (flag ? "Yes" : "No") << '\n';
     return 0;
 }
