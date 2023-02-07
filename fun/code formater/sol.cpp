@@ -24,8 +24,6 @@ void solve(string str) {
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    freopen("in", "r", stdin);
-    freopen("out", "w", stdout);
     string str;
     while (getline(cin, str)) {
         solve(str);
