@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define debug(x) cerr << #x << " = " << x << endl
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    string s;
+    getline(cin, s);
+    for (int i = 0; i < s.size(); i++) {
+        int cnt = 0;
+        while (isdigit(s[i])) {
+            cnt = cnt * 10 + (s[i] - '0');
+            i++;
+        }
+        if (cnt < 10) {
+            cout << 0;
+        }
+        cout << cnt << '\n';
+    }   
+    return 0;
+}
