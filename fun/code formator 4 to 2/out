@@ -1,55 +1,46 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-
-long long a[100001];
-struct node {
-  long long val, tag;
-}t[400001];
-
-void build(int id, int left, int right) {
-  t[id].tag = 0;
-  if (left == right) {
-    t[id].val = a[left];
+void build_max(int id, int l, int r) {
+  if (l == r) {
+    t_max[id] = a[l];
     return;
   }
-  int mid = (left + right) >> 1;
-  build(id << 1, left, mid);
-  build(id << 1 | 1, mid + 1, right);
-  t[id].val = t[id << 1].val + t[id << 1 | 1].val;
+  int mid = (l + r) >> 1;
+  build_max(id << 1, l, mid);
+  build_max(id << 1 | 1, mid + 1, r);
+  t_max[id] = max(t_max[id << 1], t_max[id << 1 | 1]);
 }
-
-void push_down(int id) {
-  t[id << 1].tag += t[id].tag;
-  t[id << 1 | 1].tag += t[id].tag;
-  t[id].tag = 0;
+int query_max(int id, int l, int r, int s, int e) {
+  if (l == s && r == e) {
+    return t_max[id];
+  }
+  int mid = (l + r) >> 1;
+  if (e <= mid) {
+    return query_max(id << 1, l, mid, s, e);
+  } else if (s > mid) {
+    return query_max(id << 1 | 1, mid + 1, r, s, e);
+  } else {
+    return max(query_max(id << 1, l, mid, s, mid), query_max(id << 1 | 1, mid + 1, r, mid + 1, e));
+  }
 }
-
-void update(int id, int left, int right, int s, int e, long long k) {
-  if (e < left || s > right) {
+void build_min(int id, int l, int r) {
+  if (l == r) {
+    t_min[id] = a[l];
     return;
   }
-  if (s <= left && right <= e) {
-    t[id].tag += k;
-    return;        
-  }
-  push_down(id);
-  int mid = (left + right) >> 1;
-  update(id << 1, left, mid, s, e, k);
-  update(id << 1 | 1, mid + 1, right, s, e, k);
-  t[id].val = t[id << 1].val + t[id << 1].tag * (mid - left + 1) + t[id << 1 | 1].val + t[id << 1 | 1].tag * (right - mid);
+  int mid = (l + r) >> 1;
+  build_min(id << 1, l, mid);
+  build_min(id << 1 | 1, mid + 1, r);
+  t_min[id] = min(t_min[id << 1], t_min[id << 1 | 1]);
 }
-
-long long query(int id, int left, int right, int s, int e) {
-  if (e < left || s > right) {
-    return 0;
+int query_min(int id, int l, int r, int s, int e) {
+  if (l == s && r == e) {
+    return t_min[id];
   }
-  if (s <= left && right <= e) {
-    return t[id].val + t[id].tag * (right - left + 1);
+  int mid = (l + r) >> 1;
+  if (e <= mid) {
+    return query_min(id << 1, l, mid, s, e);
+  } else if (s > mid) {
+    return query_min(id << 1 | 1, mid + 1, r, s, e);
+  } else {
+    return min(query_min(id << 1, l, mid, s, mid), query_min(id << 1 | 1, mid + 1, r, mid + 1, e));
   }
-  push_down(id);
-  int mid = (left + right) >> 1;
-  long long res = query(id << 1, left, mid, s, e) + query(id << 1 | 1, mid + 1, right, s, e);
-  t[id].val = t[id << 1].val + t[id << 1].tag * (mid - left + 1) + t[id << 1 | 1].val + t[id << 1 | 1].tag * (right - mid);
-  return res;
 }

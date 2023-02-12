@@ -10,5 +10,6 @@ int main() {
     for (auto [x, y] : p) {
         cout << x << " " << y << '\n';
     }
+    cout << lcm(4, 2) << '\n';
     return 0;
 }
