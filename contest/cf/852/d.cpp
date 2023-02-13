@@ -7,7 +7,7 @@ int n;
 int p[N], q[N], posp[N], posq[N];
 long long calc(int l, int r) {
     long long len = r - l + 1;
-    if (len < 0 || len > n) return 0;
+    if (len < 0) return 0;
     return len * (len + 1) / 2;
 }
 int main() {
