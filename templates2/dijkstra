@@ -1,0 +1,41 @@
+int head[N], dis[N], cnt = 0;
+bool vis[N];
+struct Edge {
+  int from, to, cost, next;
+}e[M];
+void add_edge(int u, int v, int w) {
+  cnt++;
+  e[cnt].from = u;
+  e[cnt].to = v;
+  e[cnt].cost = w;
+  e[cnt].next = head[u];
+  head[u] = cnt;
+}
+struct node {
+  int w, now;
+  bool operator < (const node& x) const {
+    return x.w < w;
+  }
+};
+priority_queue<node> pq;
+void dijkstra(int s) {
+  for (int i = 1; i <= n; i++) {
+    dis[i] = (int) 1e9;
+  }
+  dis[s] = 0;
+  pq.push({0, s});
+  while (!pq.empty()) {
+    node x = pq.top();
+    pq.pop();
+    int u = x.now;
+    if (vis[u]) continue;
+    vis[u] = 1;
+    for (int i = head[u]; i; i = e[i].next) {
+      int v = e[i].to;
+      if (dis[u] + e[i].cost < dis[v]) {
+        dis[v] = dis[u] + e[i].cost;
+        pq.push({dis[v], v});
+      }
+    }
+  }
+}

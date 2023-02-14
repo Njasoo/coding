@@ -1,0 +1,15 @@
+int t[N];
+void add(int x, int k) {
+  while (x <= n) {
+    t[x] += k;
+    x += x & -x;
+  }
+}
+long long sum(int x) {
+  long long res = 0;
+  while (x) {
+    res += t[x];
+    x -= x & -x;
+  }
+  return res;
+}

@@ -1,0 +1,34 @@
+int n, m;
+int f[N];
+int leader(int x) {
+  while (f[x] != x) x = f[x] = f[f[x]];
+  return x;
+}
+void merge(int x, int y) {
+  x = leader(x);
+  y = leader(y);
+  f[y] = x;
+}
+bool same(int x, int y) {
+  return leader(x) == leader(y);
+}
+struct Edge {
+  int from, to, cost;
+}e[M];
+bool cmp(Edge i, Edge j) {
+  return i.cost < j.cost;
+}
+int sum = 0, cnt = 0;
+void kruskal() {
+  sort(e + 1, e + 1 + m, cmp);
+  for (int i = 1; i <= m; i++) {
+    int u = e[i].from;
+    int v = e[i].to;
+    int w = e[i].cost;
+    if (same(u, v)) continue;
+    sum += w;
+    cnt++;
+    merge(u, v);
+    if (cnt == n - 1) break;
+  }
+}
