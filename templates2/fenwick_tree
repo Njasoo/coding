@@ -1,15 +1,21 @@
-int t[N];
-void add(int x, int k) {
-  while (x <= n) {
-    t[x] += k;
-    x += x & -x;
+template <typename T>
+struct Fenwick {
+  int n;
+  vector<T> t;
+  Fenwick(int _n) : n(_n), t(_n + 1) {}
+  int lowbit(int x) { return x & -x; }
+  void add(int x, T k) {
+    while (x <= n) {
+      t[x] += k;
+      x += lowbit(x);
+    }
   }
-}
-long long sum(int x) {
-  long long res = 0;
-  while (x) {
-    res += t[x];
-    x -= x & -x;
+  T sum(int x) {
+    T res = 0;
+    while (x) {
+      res += t[x];
+      x -= lowbit(x);
+    }
+    return res;
   }
-  return res;
-}
+};
