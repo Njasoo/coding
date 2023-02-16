@@ -1,15 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define debug(x) cerr << #x << " = " << x << endl
 int main() {
-  int n, m;
-  scanf("%d %d", &n, &m);
-  printf("%d %d\n", &n, &m);
-  for (int i = 0; i < len; i++) {
-    scanf("%d", a[i]);
-  }
-  if (a[i] % 2 == 0) {
-    ans++;
-  }
-  printf("%lld\n", ans);
-  return 0;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+       
+    return 0;
 }
