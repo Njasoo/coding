@@ -33,7 +33,7 @@ int main() {
     }
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= m; j++) {
-            for (int k = 1; k <= s; k++) {
+            for (int k = 1; k <= s; k++) {  
                 ans[i][j] += f[i][k] * g[k][j];
             }
         }
