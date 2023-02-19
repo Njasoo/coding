@@ -1,0 +1,8 @@
+位段由结构体实现
+1.位段的成员必须是int，unsigned int或signed int类型（其实整型就可以，short等也行,char也是整型捏）
+2.位段的成员后面有一个冒号和一个数字
+
+struct A{
+    int _a:2;
+    int _b
+}

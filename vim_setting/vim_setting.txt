@@ -1,0 +1,33 @@
+set tabstop=4 "一个tab等于几个空格，默认为8
+set softtabstop=4 "按下退格键退回缩进的长度
+set shiftwidth=4 "每一级缩进的长度设置成跟softtabstop一样
+set expandtab "空格为缩进
+set guifont=Fixedsys:h20
+
+set nu "行号
+
+set backspace=eol,indent,start "让退格可以删掉缩进
+set autoindent "自动缩进
+set cindent "针对c语言进行缩进
+
+set mouse=a "让鼠标可用
+set noswapfile "没有交换文件
+
+syntax on "语法高亮
+"set bg=dark
+
+"自动补全花括号并且空一行
+"inoremap { {<CR>}<ESC>O
+
+"快捷键
+map <C-b> :call Debug_O2()<CR>
+map <f5> :call Run()<CR>
+"编译函数
+
+func! Debug_O2()
+    exec "!g++ --std=c++17 % -o %< -O2 -Wall -Wextra -Wshadow"
+endfunc
+
+func! Run()
+    exec ":!%<.exe"
+endfunc
