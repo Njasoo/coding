@@ -1,10 +1,9 @@
-#include <bits/stdc++.h>
+#include<iostream>
 using namespace std;
-#define debug(x) cerr << #x << " = " << x << endl
-int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    int tt;
-    cin >> tt;
+int main()
+{
+    int n;
+    cin>>n;
+    cout<<n<<endl;
     return 0;
 }
