@@ -1,0 +1,4 @@
+QWidget是QMainWindow和QDialog的父类
+widget窗口吧
+
+.pro 工程文件，把整个项目涉及的文件包装在一起，跟.sln类似
