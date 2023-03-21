@@ -1,16 +1,36 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <algorithm>
+#include <queue>
+#include <vector>
+#include <map>
 using namespace std;
-#define db(x) cerr << #x << " = "<< (x) <<endl
-#define sz(x) (int)(x).size()
-int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    vector<int> a = {-3, -2, -1, 0, 1, 2, 3, 4};
-    vector<int> b = {-1, -1, -1, -1, -1, -1, -1, 4};
-    int ans = 0;
-    for (int i = 0; i < 8; i++) {
-        ans += abs(a[i] - b[i]);
-    }   
-    cout << ans << '\n';
+#define N 1000005
+#define M 500005
+#define MN 100000
+#define MOD 998244353
+#define INF 0x3f3f3f3f3f3f3f3f
+
+int main()
+{
+    int tt;
+    scanf("%d", &tt);
+    while(tt--)
+    {
+        int n;
+        scanf("%d", &n);
+        for(int i=1; i<=n; i++)
+        {
+            scanf("%d", &a[i]);
+            sum[i]=sum[i-1]+a[i];
+        }
+        int l = 1, r = n;
+        while (l <= r)
+        {
+            mid = (l + r) / 2;
+            
+        }
+    }
     return 0;
 }
