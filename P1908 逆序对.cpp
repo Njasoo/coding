@@ -17,14 +17,13 @@ using namespace std;
 #define MOD 998244353
 #define INF 0x3f3f3f3f3f3f3f3f
 
-int a[N],temp[N];
-int ans;
+long long a[N],temp[N];
+long long ans;
 
 void merge(int l1,int r1,int l2,int r2)
 {
     int p=l1;
     int pa=l1,pb=l2;
-    bool mark=0;
     while(p<=r2)
     {
         if(pa==r1+1)
@@ -34,16 +33,13 @@ void merge(int l1,int r1,int l2,int r2)
         }
         if(pb==r2+1)
         {
-            mark=1;
             temp[p++]=a[pa++];
-            ans++;
             continue;
         }
         if(a[pa]<=a[pb]) temp[p++]=a[pa++];
-        else temp[p++]=a[pb++],ans++;
+        else temp[p++]=a[pb++],ans+=r1-pa+1;
     }
     for(int i=l1;i<=r2;i++) a[i]=temp[i];
-    if(mark) ans--;
 }
 
 void merge_sort(int l,int r)
@@ -63,8 +59,6 @@ int main()
     cin>>n;
     for(int i=1;i<=n;i++) cin>>a[i];
     merge_sort(1,n);
-    for(int i=1;i<=n;i++) cout<<a[i]<<" ";
-    cout<<'\n';
     cout<<ans<<'\n';
     return 0;
 }
