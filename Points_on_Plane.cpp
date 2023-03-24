@@ -17,10 +17,33 @@ using namespace std;
 #define MOD 998244353
 #define INF 0x3f3f3f3f3f3f3f3f
 
+/*
+      *
+   *     *
+*     *     *
+   *     *
+      *
+
+   *
+*     *
+   *
+*/
+
+void solve()
+{
+    long long n;
+    cin>>n;
+    long long ans=sqrtl(n);
+    if(ans*ans==n) ans--;
+    cout<<ans<<'\n';
+}
+
 int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-       
+    int tt;
+    cin>>tt;
+    while(tt--) solve();   
     return 0;
 }
