@@ -6,10 +6,10 @@
 #include <vector>
 #include <map>
 #include <iomanip>
- 
+
 using namespace std;
- 
-#define db(x) cerr << #x << " = " << (x) <<endl
+
+#define db(x) std::cerr<< #x << " = " << (x) << std::endl
 #define N 1000005
 #define M 500005
 #define MN 1000000

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
-x_values = [-5.38, -5.35, -5.33, -5.32, -5.31, -5.29, -5.05, -4.41, -4, -3.53, -2, 0.501, 0.515, 0.565, 0.601, 0.651, 0.701, 0.73, 0.75, 0.769, 0.79, 0.795]
-y_values = [-8.09, -5.99, -4.59, -2.9, -2.05, -0.89, -0.01, 0, 0, 0, 0, 0.4, 0.4, 0.42, 0.5, 0.6, 1.02, 1.98, 3.5, 6, 10.5, 12]
+x_values = [0,2,3,3,4,4,7,8,9,12,18]
+y_values = [0,0.34,0.48,0.48,0.64,0.64,1.1,1.26,1.45,1.91,2.88]
 
 plt.style.use('seaborn')
 fig, ax = plt.subplots()
@@ -11,11 +11,11 @@ ax.scatter(x_values, y_values, s = 25) # 以y为参照, y越大, 颜色越深
 plt.plot(x_values, y_values, linewidth = 1)
 
 ax.set_title("", fontsize = 14)
-ax.set_xlabel("U(V)", fontsize = 14)
-ax.set_ylabel("I(mA)", fontsize = 14)
+ax.set_xlabel("n", fontsize = 14)
+ax.set_ylabel("q", fontsize = 14)
 
 ax.tick_params(axis = 'both', which = 'major', labelsize = 14)
-ax.axis([-6, 1, -15, 15]) # 设置x和y的范围
+ax.axis([0,20,0,3]) # 设置x和y的范围
 
 plt.show()
 plt.savefig('squares_plot.png', bbox_inches = 'tight') # 自动保存图片到同级目录 第二个参数剪掉多余的空白区域
