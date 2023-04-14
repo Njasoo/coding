@@ -6,8 +6,10 @@ using namespace std;
 #define dbp(x, y) cerr << "(" << #x << ", " << #y << ") = " << "(" << (x) << ", " << (y) << ")" << endl
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
-	
-	return 0;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n, k;
+    cin >> n >> k;
+    cout << string(n, '0' + k) << '\n';
+    return 0;
 }
