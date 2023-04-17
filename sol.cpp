@@ -1,13 +1,6 @@
-#include <bits/stdc++.h>
-
+#include<iostream>
 using namespace std;
-
-#define db(x) cerr << #x << " = " << (x) << endl
-#define dbp(x, y) cerr << "(" << #x << ", " << #y << ") = " << "(" << (x) << ", " << (y) << ")" << endl
-
-int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
-	
+int main()
+{
 	return 0;
 }
