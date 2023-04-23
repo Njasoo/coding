@@ -4,7 +4,7 @@
 int num_list,now=1;
 const int N=105;
 SqList g_list[N];
-int num_op=21;
+int num_op=23;
 
 void run()
 {
@@ -20,7 +20,8 @@ void run()
     cout<<"\t15. Show All List\t\t16. Max Subarray"<<endl;
     cout<<"\t17. SubArrayNum\t\t\t18. Sort List"<<endl;
     cout<<"\t19. Save List to File\t\t20. load List from File"<<endl;
-    cout<<"\t21. Create File"<<endl;
+    cout<<"\t21. Create File\t\t\t22. Find List"<<endl;
+    cout<<"\t23. Show List Information"<<endl;
     cout<<"-----------------------------------------------------------------"<<endl;
     cout<<"Please input number [1~"<<num_op<<"] to operate the list: ";
     int op;
@@ -306,6 +307,10 @@ void run()
                 system("pause");
                 return;
             }
+            else if(!res)
+            {
+                cout<<"The list is empty!"<<endl;
+            }
             cout<<"Traverse successfully!"<<endl;
             system("pause");
             return;
@@ -361,16 +366,34 @@ void run()
         }
         if(op==16)
         {
-            MaxSubArray(g_list[now]);
+            int res=MaxSubArray(g_list[now]);
+            if(res==-1)
+            {
+                cout<<"The list doesn't exist!"<<endl;
+                system("pause");
+                return;
+            }
+            else if(!res)
+            {
+                cout<<"The list is empty!"<<endl;
+                system("pause");
+                return;
+            }
             system("pause");
             return;
         }
         if(op==17)
         {
             int res=SubArrayNum(g_list[now]);
-            if(res==0)
+            if(res==-1)
             {
                 cout<<"The list doesn't exist!"<<endl;
+                system("pause");
+                return;
+            }
+            else if(res==0)
+            {
+                cout<<"The list is empty!"<<endl;
                 system("pause");
                 return;
             }
@@ -454,6 +477,47 @@ void run()
             cout<<"File created successfully!"<<endl;
             system("pause");
             return;
+        }
+        if(op==22)
+        {
+            cout<<"Input the list name: ";
+            string name;
+            cin>>name;
+            int res=findList(g_list,name,num_list);
+            if(!res)
+            {
+                cout<<"Can't find the list!"<<endl;
+                system("pause");
+                return;
+            }
+            else
+            {
+                cout<<"The id of "<<"\""<<name<<"\""<< " is "<<res<<endl;
+                system("pause");
+                return;
+            }
+        }
+        if(op==23)
+        {
+            if(num_list==0)
+            {
+                cout<<"There is no list!"<<endl;
+                system("pause");
+                return;
+            }
+            if(!g_list[now].elem)
+            {
+                cout<<"The list doesn't exist!"<<endl;
+                system("pause");
+                return;
+            }
+            else
+            {
+                cout<<"List name: "<<g_list[now].name<<endl;
+                cout<<"List id: "<<now<<endl;
+                system("pause");
+                return;
+            }
         }
     }
 }

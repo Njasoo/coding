@@ -178,11 +178,7 @@ status ListTraverse(SqList L)
     // 请在这里补充代码，完成本关任务
     /********** Begin *********/
     if (L.elem) {
-        if(!L.length)
-        {
-            cout<<"The list is empty!"<<endl;
-            return;
-        }
+        if(L.length==0) return ERROR;
         for (int i = 0; i < L.length - 1; i++) {
             printf("%d ", L.elem[i]);
         }
@@ -196,7 +192,8 @@ status ListTraverse(SqList L)
 //16
 int MaxSubArray(SqList L)
 {
-    if(!L.elem)return ERROR;
+    if(!L.elem)return INFEASIBLE;
+    if(!L.length)return ERROR;
     int ans=-1e9;
     int l=-1,r=-1;
     for(int i=0;i<L.length;i++)
@@ -225,7 +222,8 @@ int MaxSubArray(SqList L)
 //17
 int SubArrayNum(SqList &L)
 {
-    if(!L.elem)return ERROR;
+    if(!L.elem)return INFEASIBLE;
+    if(!L.length)return ERROR;
     int ans=-1e9;
     for(int i=0;i<L.length;i++)
     {
@@ -304,4 +302,19 @@ int LoadList(SqList &L,char filename[])
     }
     fclose(fp);
     return OK;
+}
+//22
+int findList(SqList *list,string name,int len)
+{
+    int res=-1;
+    for(int i=1;i<=len;i++)
+    {
+        if(list[i].name==name)
+        {
+            res=i;
+            break;
+        }
+    }
+    if(res==-1)return ERROR;
+    return res;
 }
