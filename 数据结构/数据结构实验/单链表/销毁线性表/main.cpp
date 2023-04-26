@@ -1,9 +1,9 @@
 #include "def.h"
 #include "string.h"
 #include "ctype.h"
-#define free free0
+// #define free free0
 #include "stu.h"
-#undef free
+// #undef free
 struct ptr{
     void *pused[100],*pfree[100];
     int len_used,len_free;
