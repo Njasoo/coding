@@ -16,6 +16,7 @@ typedef int ElemType; //数据元素类型定义
 #define LISTINCREMENT  10
 typedef int ElemType;
 typedef struct LNode{  //单链表（链式结构）结点的定义
+      char name[105];
       ElemType data;
       struct LNode *next;
     }LNode,*LinkList;

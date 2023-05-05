@@ -1,15 +1,22 @@
 // 1
-status InitList(LinkList &L)
+status InitList(LinkList &L, LinkList g_list[], char name[], int num_list)
 // 线性表L不存在，构造一个空的线性表，返回OK，否则返回INFEASIBLE。
 {
     // 请在这里补充代码，完成本关任务
     /********** Begin *********/
-    if (L == nullptr) {
+    if (L) {
+        return INFEASIBLE;
+    } else {
+        for (int i = 1; i <= num_list; i++) {
+            if (!g_list[i]) continue;
+            if (strcmp(g_list[i]->name, name) == 0) {
+                return ERROR;
+            }
+        }
         L = (LinkList)malloc(sizeof(LNode));
+        strcpy(L->name, name);
         L->next = NULL;
         return OK;
-    } else {
-        return INFEASIBLE;
     }
 
     /********** End **********/
@@ -23,6 +30,7 @@ status DestroyList(LinkList &L)
     if (L == nullptr) {
         return INFEASIBLE;
     }
+    strcpy(L->name, "");
     while (L) {
         auto nex = L->next;
         free(L);
@@ -310,7 +318,7 @@ status LoadList(LinkList &L,char FileName[])
 {
     // 请在这里补充代码，完成本关任务
     /********** Begin 2 *********/
-    if (L) return INFEASIBLE;
+    if (!L) return INFEASIBLE;
 
     FILE *fp = fopen(FileName, "r");
     int x;
@@ -411,8 +419,23 @@ void CreateFile(char filename[]) {
     system(command);
 }
 // 19
-status ListShift(int &now, int i, int num_list) {
-    if (i < 1 || i > num_list) return ERROR;
-    now = i;
+status ListShift(LinkList g_list[], int &now, char name[], int num_list) {
+    for (int i = 1; i <= num_list; i++) {
+        if (!g_list[i]) continue;
+        if (strcmp(g_list[i]->name, name) == 0) {
+            now = i;
+            return OK;
+        }
+    }
+    return ERROR;
+}
+// 20
+status ConsecutiveInsert(LinkList &L, int n) {
+    printf("Now input the elements: ");
+    for (int i = 1; i <= n; i++) {
+        int x;
+        scanf("%d", &x);
+        ListInsert(L, ListLength(L) + 1, x);
+    }
     return OK;
 }

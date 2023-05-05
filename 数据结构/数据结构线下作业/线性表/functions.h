@@ -1,8 +1,12 @@
 //1
-status InitList(SqList& L)
+status InitList(SqList& L, SqList g_list[], string name, int num_list)
 {
     if (L.elem != NULL) return INFEASIBLE;
+    for (int i = 1; i <= num_list; i++) {
+        if(g_list[i].name==name)return ERROR;
+    }
     L.elem = (ElemType*)malloc(sizeof(ElemType));
+    L.name=name;
     L.length = 0;
     L.listsize = LIST_INIT_SIZE;
     return OK;
@@ -13,6 +17,7 @@ status DestroyList(SqList& L)
     if (L.elem) {
         free(L.elem);
         L.length=0;
+        // L.name="";
         L.name="";
         L.elem = NULL;
         return OK;
@@ -189,6 +194,31 @@ status ListTraverse(SqList L)
 
     /********** End **********/
 }
+//13
+status ListShift(SqList g_list[],int num_list,string name,int &now)
+{
+    for(int i=1;i<=num_list;i++)
+    {
+        if(g_list[i].name==name)
+        {
+            now=i;
+            return OK;
+        }
+    }
+    return ERROR;
+}
+//14
+status ConsecutiveInsert(SqList &L,int n)
+{
+    cout<<"now input the elements: ";
+    for(int i=1;i<=n;i++)
+    {
+        int x;
+        cin>>x;
+        L.elem[L.length++]=x;
+    }
+    return OK;
+}
 //16
 int MaxSubArray(SqList L)
 {
@@ -220,39 +250,29 @@ int MaxSubArray(SqList L)
     return OK;
 }
 //17
-int SubArrayNum(SqList &L)
+int SubArrayNum(SqList &L,int k)
 {
-    if(!L.elem)return INFEASIBLE;
-    if(!L.length)return ERROR;
-    int ans=-1e9;
+    if(!L.elem) return -1;
+    int res=0;
     for(int i=0;i<L.length;i++)
     {
         int cnt=0;
         for(int j=i;j<L.length;j++)
         {
             cnt+=L.elem[j];
-            ans=max(ans,cnt);
-        }
-    }
-    int num=0;
-    for(int i=0;i<L.length;i++)
-    {
-        int cnt=0;
-        for(int j=i;j<L.length;j++)
-        {
-            cnt+=L.elem[j];
-            if(cnt==ans)
+            if(cnt==k)
             {
-                num++;
-                for(int k=i;k<j;k++)
+                res++;
+                for(int K=i;K<j;K++)
                 {
-                    cout<<L.elem[k]<<" + ";
+                    cout<<L.elem[K]<<"+";
                 }
-                cout<<L.elem[j]<<" = "<<ans<<endl;
+                cout<<L.elem[j]<<"="<<k<<endl;
             }
         }
     }
-    cout<<"There are total " <<num<<" sum of subarray equal to "<<ans<<endl;
+    if(!res)return ERROR;
+    cout<<"There are totally "<<res<<" sum of subarray="<<k<<"."<<endl;
     return OK;
 }
 //18
@@ -304,17 +324,17 @@ int LoadList(SqList &L,char filename[])
     return OK;
 }
 //22
-int findList(SqList *list,string name,int len)
-{
-    int res=-1;
-    for(int i=1;i<=len;i++)
-    {
-        if(list[i].name==name)
-        {
-            res=i;
-            break;
-        }
-    }
-    if(res==-1)return ERROR;
-    return res;
-}
+// int findList(SqList *list,string name,int len)
+// {
+//     int res=-1;
+//     for(int i=1;i<=len;i++)
+//     {
+//         if(list[i].name==name)
+//         {
+//             res=i;
+//             break;
+//         }
+//     }
+//     if(res==-1)return ERROR;
+//     return res;
+// }
