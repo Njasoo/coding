@@ -247,6 +247,10 @@ void run()
 		vis[nownode]=1;
 		path[0]=v;
 		MaxPath(g_list[now],nownode,node,1,path,vis,ans,r_ans);
+		if(ans==(int)1e9){
+			printf("两顶点不连通\n");
+			return; 
+		}
 		printf("最短路径的长度为%d\n",ans);
 		printf("其中一条路径为: \n"); 
 		for(int i=0;i<ans;i++)

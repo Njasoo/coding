@@ -144,7 +144,7 @@ void run()
 		scanf("%d",&LR);
 		printf("下面输入要插入的结点的资料\n");
 		printf("输入key: ");
-		int r_key;//要插入的结点的关机祝你 
+		int r_key;//要插入的结点的关键字 
 		scanf("%d",&r_key);
 		printf("输入others: ");
 		char others[20];

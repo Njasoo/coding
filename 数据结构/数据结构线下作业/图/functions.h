@@ -617,45 +617,85 @@ void MaxPath(ALGraph &G,int now,int v,int step,int path[],int vis[],int &ans,int
 //15
 int ConnectedComponentsNums(ALGraph &G)
 {
-	if(G.vexnum==0)return 0;//空图不遍历 
-    int vis[105]={0};//记录是否遍历过 
-    int now=0;//记录现在所在结点的位序 
-    ArcNode *p;
-    int res=0;
-    while(1)
+	int q[1005];
+    int front=1,top=0;
+    q[++top]=0;
+    int vis[1005]={0};
+    int res=1;
+    vis[0]=1;
+//    visit(G.vertices[0].data);
+    while(front<=top)
     {
-        p=G.vertices[now].firstarc;
-        bool finded=0;//记录一下这一轮有没有找到下一个可以遍历的结点 
-        vis[now]=1;//标记当前结点 
-//        visit(G.vertices[now].data);
+        int u=q[front];
+        front++;
+        auto p=G.vertices[u].firstarc;
         while(p)
         {
             if(vis[p->adjvex])
             {
                 p=p->nextarc;
-                continue;//记得加 
+                continue;
             }
-            now=p->adjvex;//改变为接下来要遍历的结点 
-            finded=1;//说明现在找到了下一个可以遍历的结点 
-            break;
+            vis[p->adjvex]=1;
+//            visit(G.vertices[p->adjvex].data);
+            q[++top]=p->adjvex;
+            p=p->nextarc;
         }
-        if(!finded)//因为未必是连通图,所以继续遍历整个头结点顺序表,看看有没有顶点未被遍历过,然后就可以把下一个连通块完全遍历 
+        if(front>top)//队空时继续找 
         {
-            bool flag=0;
+        	bool finded=0;
             for(int i=0;i<G.vexnum;i++)
             {
-                if(!vis[i])
-                {
-                    flag=1;
-                    now=i;
-                    break;
-                }
+                if(vis[i])continue;
+                finded=1;
+                vis[i]=1;
+//                visit(G.vertices[i].data);
+                q[++top]=i;
+                break;//找到一个继续就行 
             }
-            if(!flag)break;
-            res++;
+            if(finded)res++;
         }
     }
     return res;
+//	if(G.vexnum==0)return 0;//空图不遍历 
+//    int vis[105]={0};//记录是否遍历过 
+//    int now=0;//记录现在所在结点的位序 
+//    ArcNode *p;
+//    int res=1;
+//    while(1)
+//    {
+//        p=G.vertices[now].firstarc;
+//        bool finded=0;//记录一下这一轮有没有找到下一个可以遍历的结点 
+//        vis[now]=1;//标记当前结点 
+////        visit(G.vertices[now].data);
+//        while(p)
+//        {
+//            if(vis[p->adjvex])
+//            {
+//                p=p->nextarc;
+//                continue;//记得加 
+//            }
+//            now=p->adjvex;//改变为接下来要遍历的结点 
+//            finded=1;//说明现在找到了下一个可以遍历的结点 
+//            break;
+//        }
+//        if(!finded)//因为未必是连通图,所以继续遍历整个头结点顺序表,看看有没有顶点未被遍历过,然后就可以把下一个连通块完全遍历 
+//        {
+//            bool flag=0;
+//            for(int i=0;i<G.vexnum;i++)
+//            {
+//                if(!vis[i])
+//                {
+//                    flag=1;
+//                    now=i;
+//                    break;
+//                }
+//            }
+//            if(!flag)break;
+//            res++;
+//        }
+//    }
+//    return res;
 }
 //16
 status SaveGraph(ALGraph G, char FileName[])
