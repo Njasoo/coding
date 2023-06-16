@@ -1,4 +1,4 @@
-void visit(VertexType v)//多次利用的函数 
+ void visit(VertexType v)//多次利用的函数 
 {
 	printf(" %d %s",v.key,v.others);
 }
