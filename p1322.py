@@ -1,0 +1,1 @@
+print(abs(eval(input().replace(' ', '').replace('FD', '+').replace('BK', '-').replace('REPEAT', '+(').replace('[', ')*(').replace(']', ')').replace('()', '0'))))
