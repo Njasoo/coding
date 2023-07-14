@@ -1,52 +1,87 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int N = 2e5 + 5;
+int n, r, q;
 int s[N], w[N];
-pair<int, int> t[N];
-int read() {
-    int x = 0, f = 1;
-    int ch = getchar();
-    while (ch < '0' || ch > '9') {
-        if (ch == '-') f = -1;
-        ch = getchar();
+int len_win, len_lose;
+struct node {
+    int s, id;
+    bool operator < (const node &x) const {
+        if (x.s == s) {
+            return id < x.id;
+        }
+        return s > x.s;
     }
-    while (ch >= '0' && ch <= '9') {
-        x = x * 10 + ch - '0', ch = getchar();
+} t[N], temp_t[N], win[N], lose[N];
+int k;
+void merge() {
+    int p = 1;
+    int p_win = 1, p_lose = 1;
+    while (p <= n * 2) {
+        if (p_win == n + 1) {
+            temp_t[p++] = lose[p_lose++];
+            continue;
+        }
+        if (p_lose == n + 1) {
+            temp_t[p++] = win[p_win++];
+            continue;
+        }
+        if (win[p_win] < lose[p_lose]) {
+            temp_t[p++] = win[p_win++];
+        } else {
+            temp_t[p++] = lose[p_lose++];
+        }
     }
-    return x * f;
+    // cerr << "ROUND: " << ++k << endl;
+    // for (int i = 1; i <= n * 2; i++) {
+    //     cerr << temp_t[i].s << " " << temp_t[i].id << endl;
+    // }
+    for (int i = 1; i <= n * 2; i++) {
+        t[i] = temp_t[i];
+    }
 }
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    int n = read(), r = read(), q = read();
+    cin >> n >> r >> q;
     for (int i = 1; i <= n * 2; i++) {
-        s[i] = read();
-    }      
+        cin >> s[i];
+    }
     for (int i = 1; i <= n * 2; i++) {
-        w[i] = read();
+        cin >> w[i];
     }
     for (int i = 1; i <= n * 2; i++) {
         t[i] = {s[i], i};
     }
+    sort(t + 1, t + 1 + n * 2);
+    // for (int i = 1; i <= n * 2; i++) {
+    //     cerr << t[i].s << " " << t[i].id << endl;
+    // }
     for (int k = 1; k <= r; k++) {
-        sort(t + 1, t + 1 + n * 2, [&](auto i, auto j) {
-            if (i.first == j.first) return i.second < j.second;
-            return i.first > j.first;
-        });
         for (int i = 1; i <= n * 2; i += 2) {
-            int p1 = w[t[i].second];
-            int p2 = w[t[i + 1].second];
+            int p1 = w[t[i].id];
+            int p2 = w[t[i + 1].id];
             if (p1 > p2) {
-                t[i].first++;
+                t[i].s++;
+                win[(i + 1) / 2] = t[i];
+                // cerr << "win: " << win[len_win].s << " " << win[len_win].id << endl;
+                lose[(i + 1) / 2] = t[i + 1];
             } else {
-                t[i + 1].first++;
+                t[i + 1].s++;
+                win[(i + 1) / 2] = t[i + 1];
+                // cerr << "win: " << win[len_win].s << " " << win[len_win].id << endl;
+                lose[(i + 1) / 2] = t[i];
             }
         }
+        merge();
     }
-    sort(t + 1, t + 1 + n * 2, [&](auto i, auto j) {
-        if (i.first == j.first) return i.second < j.second;
-        return i.first > j.first;
-    });
-    cout << t[q].second << '\n';
+    // for (int i = 1; i <= n * 2; i++) {
+    //     cerr << t[i].s << " ";
+    // }
+    // cerr << endl;
+    // for (int i = 1; i <= n * 2; i++) {
+    //     cerr << t[i].id << " \n"[i == n * 2];
+    // }
+    cout << t[q].id << '\n';
     return 0;
 }
