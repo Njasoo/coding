@@ -1,0 +1,19 @@
+ll rd(){
+    ll res=0;
+    int flag=1;
+    char ch=getchar();
+    while(ch<'0'||ch>'9'){
+        if(ch=='-')flag=-1;
+        ch=getchar();
+    }
+    while(ch>='0'&&ch<='9'){
+        res=res*10+ch-'0';
+        ch=getchar();
+    }
+    return res*flag;
+}
+void wr(ll num){
+    if(num<0)num=-num,putchar('-');
+    if(num>10)wr(num/10);
+    putchar(num%10+'0');
+}
