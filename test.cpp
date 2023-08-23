@@ -1,53 +1,203 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <cstring>
+#include <cstdarg>
+#include <cassert>
+#include <queue>
+#include <map>
+#include <unordered_map>
+#include <set>
+#include <sstream>
+#include <cstdlib>
+#include <stack>
+#include <functional>
+#include <iomanip>
+
 using namespace std;
-#define db(x) cerr << #x << " = "<< (x) <<endl
-#define sz(x) (int)(x).size()
-const int N=1e5+5;
-int ls[N][2],deleted[N];
+
+vector<string> vec_splitter(string s) {
+    s += ',';
+    vector<string> res;
+    while (!s.empty()) {
+        res.push_back(s.substr(0, s.find(',')));
+        s = s.substr(s.find(',') + 1);
+    }
+    return res;
+}
+
+void debug_out(vector<string> __attribute__((unused)) args, // __attribute__((unused)): avoid warning
+__attribute__ ((unused)) int idx,
+__attribute__((unused)) int LINE_NUM) { cerr << endl; }
+
+template<typename Head, typename... Tail>
+void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
+    if (idx > 0) cerr << ", "; else cerr << "Line(" << LINE_NUM << ") ";
+    stringstream ss; ss << H;
+    cerr << args[idx] << " == " << ss.str(); // str() temporary string
+    debug_out(args, idx + 1, LINE_NUM, T...);
+}
+
+#ifdef LOCAL
+#define debug(...) debug_out(vec_splitter(#__VA_ARGS__), 0, __LINE__, __VA_ARGS__)
+#else
+#define debug(...) 114514;
+#endif
+
+struct FastIO { // fast IO stream
+    // https://en.cppreference.com/w/cpp/types/is_integral
+    // https://en.cppreference.com/w/cpp/types/enable_if
+    template<typename T, typename enable_if<is_integral<T>::value, int>::type = 0> // reading integrals
+    inline const FastIO& operator>>(T& x) const {
+        x = 0;
+        bool flag = 0;
+        char ch = getchar();
+        while (!isdigit(ch)) {
+            if (ch == '-') flag = 1;
+            ch = getchar();
+        }
+        while (isdigit(ch)) {
+            x = x * 10 + ch - '0';
+            ch = getchar();
+        }
+        if (flag) x = -x;
+        return *this;
+    }
+
+    inline const FastIO& operator>>(__int128_t& x) const {
+        x = 0;
+        bool flag = 0;
+        char ch = getchar();
+        while (!isdigit(ch)) {
+            if (ch == '-') flag = 1;
+            ch = getchar();
+        }
+        while (isdigit(ch)) {
+            x = x * 10 + ch - '0';
+            ch = getchar();
+        }
+        if (flag) x = -x;
+        return *this;
+    }
+
+    inline const FastIO& operator>>(char& c) const {
+        c = getchar();
+        while (c == ' ' || c == '\n') c = getchar();
+        return *this;
+    }
+
+    inline const FastIO& operator>>(std::string& s) const {
+        char ch = getchar();
+        while (ch == ' ' || ch == '\n') ch = getchar();
+        while (ch != ' ' && ch != EOF && ch != '\n') {
+            s += ch;
+            ch = getchar();
+        }
+        return *this;
+    }
+
+    inline const FastIO& operator>>(char s[]) const {
+        int p = 0;
+        char ch = getchar();
+        while (ch == ' ' || ch == '\n') ch = getchar();
+        while (ch != ' ' && ch != EOF && ch != '\n') {
+            s[p++] = ch;
+            ch = getchar();
+        }
+        s[p] = '\0';
+        return *this;
+    }
+
+    // https://en.cppreference.com/w/cpp/types/is_floating_point
+    template<typename T, typename enable_if<is_floating_point<T>::value, int>::type = 0> // reading floating point
+    inline const FastIO& operator>>(T& x) const {
+        x = 0;
+        bool flag = 0;
+        char ch = getchar();
+        while (!isdigit(ch)) {
+            if (ch == '-') flag = 1;
+            ch = getchar();
+        }
+        while (isdigit(ch)) {
+            x = x * 10 + ch - '0';
+            ch = getchar();
+        }
+        if (ch == '.') {
+            T factor = 0.1;
+            ch = getchar();
+            while (isdigit(ch)) {
+                x = x + (ch - '0') * factor;
+                ch = getchar();
+                factor *= 0.1;
+            }
+        }
+        if (flag) x = -x;
+        return *this;
+    }
+
+    // output
+    template<typename T, typename enable_if<is_integral<T>::value, int>::type = 0>
+    inline const FastIO& operator<<(T x) const {
+        char s[128];
+        int p = 0;
+        if (x == 0) s[p++] = '0';
+        while (x) {
+            s[p++] = x % 10 + '0';
+            x /= 10;
+        }
+        while (p) {
+            putchar(s[--p]);
+        }
+        return *this;
+    }
+
+    inline const FastIO& operator<<(__int128_t x) const {
+        char s[256];
+        int p = 0;
+        if (x == 0) s[p++] = '0';
+        while (x) {
+            s[p++] = x % 10 + '0';
+            x /= 10;
+        }
+        while (p) {
+            putchar(s[--p]);
+        }
+        return *this;
+    } 
+
+    inline const FastIO& operator<<(const char& x) const {
+        putchar(x);
+        return *this;
+    }
+
+    inline const FastIO& operator<<(const char s[]) const {
+        while (*s) {
+            putchar(*s++);
+        }
+        return *this;
+    }
+
+    inline const FastIO& operator<<(const string& s) const {
+        for (const char& c : s) {
+            putchar(c);
+        }
+        return *this;
+    }
+} fin, fout;
+#define cin fin
+#define cout fout
+
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    int n;
-    cin>>n;
-    for(int i=2;i<=n;i++){
-        int k,p;
-        cin>>k>>p;
-        if(p){
-            int k_r=ls[k][1];
-            ls[k][1]=i;
-            ls[i][0]=k;
-            ls[k_r][0]=i;
-            ls[i][1]=k_r;
-        }else{
-            int k_l=ls[k][0];
-            ls[i][1]=k;
-            ls[k][0]=i;
-            ls[k_l][1]=i;
-            ls[i][0]=k_l;
+    srand(time(0));
+    int n = rand() % (20 - 10 + 1) + 10, m = rand() % 11 + 10;
+    cout << n << " " << m << '\n';
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1;j <= m; j++) {
+            int r = rand() % 10;
+            cout << char('a' + r) << " ";
         }
-    }   
-    int m;
-    cin>>m;
-    for(int i=1;i<=m;i++){
-        int x;
-        cin>>x;
-        if(deleted[x])continue;
-        deleted[x]=1;
-        int x_l=ls[x][0],x_r=ls[x][1];
-        ls[x_l][1]=x_r;
-        ls[x_r][0]=x_l;
+        cout << '\n';
     }
-    int now=0;
-    for(int i=1;i<=n;i++){
-        if(ls[i][0]==0){
-            now=i;
-            break;
-        }
-    }
-    while(now){
-        cout<<now<<" ";
-        now=ls[now][1];
-    }
-    cout<<'\n';
     return 0;
 }
