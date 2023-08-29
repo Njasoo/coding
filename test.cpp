@@ -1,203 +1,50 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <cmath>
-#include <cstring>
-#include <cstdarg>
-#include <cassert>
-#include <queue>
-#include <map>
-#include <unordered_map>
-#include <set>
-#include <sstream>
-#include <cstdlib>
-#include <stack>
-#include <functional>
-#include <iomanip>
-
-using namespace std;
-
-vector<string> vec_splitter(string s) {
-    s += ',';
-    vector<string> res;
-    while (!s.empty()) {
-        res.push_back(s.substr(0, s.find(',')));
-        s = s.substr(s.find(',') + 1);
+ #include<cstdio>
+    const long long inf=-(1<<62);
+    int m,cnt;
+    char op[2];
+    long long data[800005],x,t,p;
+    long long max(long long a,long long b)
+    {
+        return a>b?a:b;
     }
-    return res;
-}
-
-void debug_out(vector<string> __attribute__((unused)) args, // __attribute__((unused)): avoid warning
-__attribute__ ((unused)) int idx,
-__attribute__((unused)) int LINE_NUM) { cerr << endl; }
-
-template<typename Head, typename... Tail>
-void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
-    if (idx > 0) cerr << ", "; else cerr << "Line(" << LINE_NUM << ") ";
-    stringstream ss; ss << H;
-    cerr << args[idx] << " == " << ss.str(); // str() temporary string
-    debug_out(args, idx + 1, LINE_NUM, T...);
-}
-
-#ifdef LOCAL
-#define debug(...) debug_out(vec_splitter(#__VA_ARGS__), 0, __LINE__, __VA_ARGS__)
-#else
-#define debug(...) 114514;
-#endif
-
-struct FastIO { // fast IO stream
-    // https://en.cppreference.com/w/cpp/types/is_integral
-    // https://en.cppreference.com/w/cpp/types/enable_if
-    template<typename T, typename enable_if<is_integral<T>::value, int>::type = 0> // reading integrals
-    inline const FastIO& operator>>(T& x) const {
-        x = 0;
-        bool flag = 0;
-        char ch = getchar();
-        while (!isdigit(ch)) {
-            if (ch == '-') flag = 1;
-            ch = getchar();
+    void add(int s,int k,int o,int l,int r)
+    {
+        if(l==r)
+        {
+            data[o]=k;
+            return;
         }
-        while (isdigit(ch)) {
-            x = x * 10 + ch - '0';
-            ch = getchar();
-        }
-        if (flag) x = -x;
-        return *this;
+        int mid=(l+r)>>1;
+        if(mid>=s) add(s,k,o<<1,l,mid);
+        if(mid<s) add(s,k,o<<1|1,mid+1,r);
+        data[o]=max(data[o<<1],data[o<<1|1])%p;
     }
-
-    inline const FastIO& operator>>(__int128_t& x) const {
-        x = 0;
-        bool flag = 0;
-        char ch = getchar();
-        while (!isdigit(ch)) {
-            if (ch == '-') flag = 1;
-            ch = getchar();
-        }
-        while (isdigit(ch)) {
-            x = x * 10 + ch - '0';
-            ch = getchar();
-        }
-        if (flag) x = -x;
-        return *this;
+    long long ask(int ll,int rr,int o,int l,int r)
+    {
+        if(ll<=l&&rr>=r) return data[o];
+        int mid=(l+r)>>1;
+        long long a=inf,b=inf;
+        if(mid>=ll) a=ask(ll,rr,o<<1,l,mid);
+        if(mid<rr) b=ask(ll,rr,o<<1|1,mid+1,r);
+        return max(a,b);
     }
-
-    inline const FastIO& operator>>(char& c) const {
-        c = getchar();
-        while (c == ' ' || c == '\n') c = getchar();
-        return *this;
-    }
-
-    inline const FastIO& operator>>(std::string& s) const {
-        char ch = getchar();
-        while (ch == ' ' || ch == '\n') ch = getchar();
-        while (ch != ' ' && ch != EOF && ch != '\n') {
-            s += ch;
-            ch = getchar();
-        }
-        return *this;
-    }
-
-    inline const FastIO& operator>>(char s[]) const {
-        int p = 0;
-        char ch = getchar();
-        while (ch == ' ' || ch == '\n') ch = getchar();
-        while (ch != ' ' && ch != EOF && ch != '\n') {
-            s[p++] = ch;
-            ch = getchar();
-        }
-        s[p] = '\0';
-        return *this;
-    }
-
-    // https://en.cppreference.com/w/cpp/types/is_floating_point
-    template<typename T, typename enable_if<is_floating_point<T>::value, int>::type = 0> // reading floating point
-    inline const FastIO& operator>>(T& x) const {
-        x = 0;
-        bool flag = 0;
-        char ch = getchar();
-        while (!isdigit(ch)) {
-            if (ch == '-') flag = 1;
-            ch = getchar();
-        }
-        while (isdigit(ch)) {
-            x = x * 10 + ch - '0';
-            ch = getchar();
-        }
-        if (ch == '.') {
-            T factor = 0.1;
-            ch = getchar();
-            while (isdigit(ch)) {
-                x = x + (ch - '0') * factor;
-                ch = getchar();
-                factor *= 0.1;
+    int main()
+    {
+        scanf("%d %lld",&m,&p);
+        for(int i=0;i<m;i++)
+        {
+            scanf("%s %lld",op,&x);
+            if(op[0]=='A')
+            {
+                add(cnt+1,(x+t)%p,1,1,m);
+                cnt++;
+            }
+            if(op[0]=='Q')
+            {
+                if(x==0) t=0;
+                else t=ask(cnt-x+1,cnt,1,1,m)%p;
+                printf("%lld\n",t);
             }
         }
-        if (flag) x = -x;
-        return *this;
+        return 0;
     }
-
-    // output
-    template<typename T, typename enable_if<is_integral<T>::value, int>::type = 0>
-    inline const FastIO& operator<<(T x) const {
-        char s[128];
-        int p = 0;
-        if (x == 0) s[p++] = '0';
-        while (x) {
-            s[p++] = x % 10 + '0';
-            x /= 10;
-        }
-        while (p) {
-            putchar(s[--p]);
-        }
-        return *this;
-    }
-
-    inline const FastIO& operator<<(__int128_t x) const {
-        char s[256];
-        int p = 0;
-        if (x == 0) s[p++] = '0';
-        while (x) {
-            s[p++] = x % 10 + '0';
-            x /= 10;
-        }
-        while (p) {
-            putchar(s[--p]);
-        }
-        return *this;
-    } 
-
-    inline const FastIO& operator<<(const char& x) const {
-        putchar(x);
-        return *this;
-    }
-
-    inline const FastIO& operator<<(const char s[]) const {
-        while (*s) {
-            putchar(*s++);
-        }
-        return *this;
-    }
-
-    inline const FastIO& operator<<(const string& s) const {
-        for (const char& c : s) {
-            putchar(c);
-        }
-        return *this;
-    }
-} fin, fout;
-#define cin fin
-#define cout fout
-
-int main() {
-    srand(time(0));
-    int n = rand() % (20 - 10 + 1) + 10, m = rand() % 11 + 10;
-    cout << n << " " << m << '\n';
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1;j <= m; j++) {
-            int r = rand() % 10;
-            cout << char('a' + r) << " ";
-        }
-        cout << '\n';
-    }
-    return 0;
-}
