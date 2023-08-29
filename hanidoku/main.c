@@ -42,7 +42,7 @@ int VarNode_init(VarNode** node) {
     *node = (VarNode*) malloc(sizeof(VarNode));
     (*node)->next = NULL;
     (*node)->value = 0;
-    debug("VarNode_init: 1\n");
+    // debug("VarNode_init: 1\n");
     return 1;
 }
 
@@ -50,19 +50,19 @@ int VarNode_find(VarNode* node, int value) { // 查找变量链表中是否含�
     VarNode* p = node;
     while (p) {
         if (p->value == value) {
-            printf("VarNode_find: 1\n");
+            // printf("VarNode_find: 1\n");
             return 1; // 找到
         }
         p = p->next;
     }
-    debug("VarNode_find: 0\n");
+    // debug("VarNode_find: 0\n");
     return 0; // 找不到
 }
 
 int VarNode_push(VarNode** head, VarNode* node) { // 插入新的VarNode带链表尾端
     if (*head == NULL) {
         *head = node;
-        debug("VarNode_push: 1\n");
+        // debug("VarNode_push: 1\n");
         return 1;
     }
     VarNode* p = *head;
@@ -70,7 +70,7 @@ int VarNode_push(VarNode** head, VarNode* node) { // 插入新的VarNode带链�
         p = p->next;
     }
     p->next = node;
-    debug("VarNode_push: 1\n");
+    // debug("VarNode_push: 1\n");
     return 1;
 }
 
@@ -104,7 +104,7 @@ int VarNode_delete(VarNode** node, int value) { // 删掉变量值为value的结
         }
         p = nex;
     }
-    debug("VarNode_delete: %d\n", cnt);
+    // debug("VarNode_delete: %d\n", cnt);
     return cnt;
 }
 
@@ -118,7 +118,7 @@ int ClauseHead_init(ClauseHead** node) {
     (*node)->var_list = NULL;
     (*node)->next = NULL;
     (*node)->size = 0; // 子句变量数初始化为0
-    debug("ClauseHead_init: 1\n");
+    // debug("ClauseHead_init: 1\n");
     return 1;
 }
 
@@ -126,7 +126,7 @@ int ClauseHead_push(ClauseHead** list, ClauseHead* node) {
     // 不带头结点的链表, 所以第一个结点可能为空, 否则找到最后一个结点, 插入新节点到尾部
     if (*list == NULL) {
         (*list) = node;
-        debug("ClauseHead_push: 1\n");
+        // debug("ClauseHead_push: 1\n");
         return 1;
     }
     ClauseHead* p = (*list);
@@ -134,7 +134,7 @@ int ClauseHead_push(ClauseHead** list, ClauseHead* node) {
         p = p->next;
     }
     p->next = node;
-    debug("ClauseHead_push: 1\n");
+    // debug("ClauseHead_push: 1\n");
     return 1;
 }
 
@@ -156,7 +156,7 @@ int ClauseHead_delete(ClauseHead** node, int value) { // 删除子句含有value
     }
     // 是否被删完了
     if ((*node) == NULL) {
-        debug("ClauseHead_delete: 1\n");
+        // debug("ClauseHead_delete: 1\n");
         return 1;
     }
     // 删除中间的结点的情况
@@ -175,7 +175,7 @@ int ClauseHead_delete(ClauseHead** node, int value) { // 删除子句含有value
         free(cur);
         cur = nex; // 不需要指向NULL了, 直接指向下一个结点
     }
-    debug("ClauseHead_delete: 1\n");
+    // debug("ClauseHead_delete: 1\n");
     return 1;
 }
 
@@ -192,7 +192,7 @@ ClauseHead* ClauseHead_copy(ClauseHead* node) {
             VarNode_init(&new_VarNode);
             new_VarNode->value = pp->value;
             VarNode_push(&new_ClauseHead_node->var_list, new_VarNode);
-            new_ClauseHead_node->size++; // 每push一个新的VarNode, ClauseHead的size就会增加1
+            // new_ClauseHead_node->size++; // 每push一个新的VarNode, ClauseHead的size就会增加1 // 没有必要这句话
             pp = pp->next;
         }
         ClauseHead_push(&new_node, new_ClauseHead_node);
@@ -236,7 +236,23 @@ int free_VarNode_in_ClauseHead(ClauseHead** node) {
         free(p);
         p = nex;
     }
-    debug("free_VarNode_in_ClauseHead: 1\n");
+    // debug("free_VarNode_in_ClauseHead: 1\n");
+    return 1;
+}
+
+int print_CNF(ClauseHead* head) {
+    ClauseHead* p = head;
+    while (p) {
+        debug("size: %d\n", p->size);
+        VarNode* pp = p->var_list;
+        while (pp) {
+            debug("%d ", pp->value);
+            pp = pp->next;
+        }
+        debug("\n");
+        p = p->next;
+    }
+    // debug("printf_CNF: 1\n");
     return 1;
 }
 
@@ -249,10 +265,11 @@ int simplification(ClauseHead** head, int unit_value) {
         if (VarNode_find(p->var_list, -unit_value)) {
             int cnt = VarNode_delete(&(p->var_list), -unit_value);
             p->size -= cnt; // 减去删除掉的结点个数
+            debug("%d\n", cnt);
         }
         p = p->next;
     }
-    debug("simplification: 1\n");
+    // debug("simplification: 1\n");
     return 1;
 }
 
@@ -266,7 +283,7 @@ int existEmptyClause(ClauseHead* node) { // 查找是否存在空子句
         }
         p = p->next;
     }
-    debug("existEmptyClause: 0\n");
+    // debug("existEmptyClause: 0\n");
     return 0;
 }
 
@@ -303,6 +320,7 @@ int add_unit_as_clause(ClauseHead** head, int unit_value) {
     VarNode_init(&new_VarNode);
     new_VarNode->value = unit_value;
     VarNode_push(&new_ClauseHead_node->var_list, new_VarNode);
+    ClauseHead_push(head, new_ClauseHead_node);
     debug("add_unit_as_clause: 1\n");
     return 1;
 }
@@ -310,7 +328,10 @@ int add_unit_as_clause(ClauseHead** head, int unit_value) {
 int DPLLsolve(ClauseHead** node) {
     ClauseHead* p = NULL;
     int unit_value = 0;
+    // debug("*node: ");
+    // print_CNF(*node);
     while ((p = isUnitClause(*node)) != NULL) { // 当子句集中存在单子句的时候
+        // print_CNF(*node);
         unit_value = p->var_list->value; // var_list也就一个结点
         bool_value[abs(unit_value)] = unit_value > 0 ? 1 : -1;
         simplification(node, unit_value);
@@ -326,7 +347,11 @@ int DPLLsolve(ClauseHead** node) {
     bool_value[abs(unit_value)] = unit_value > 0 ? 1 : -1; // 第一个赋值选择, 正值为true, 赋值为false
                                                             // 关键是正值为true的时候, 就已经可以知道这一个格子填什么数字, 所以先走这一条路
     ClauseHead* original_copy1 = ClauseHead_copy(*node);
+    // debug("original_copy1:\n");
+    // print_CNF(original_copy1);
     add_unit_as_clause(&original_copy1, unit_value); // 将变量作为单子句加入子句集中, 然后递归地解决这个问题
+    // debug("original_copy1(after adding unite_clause): \n");
+    // print_CNF(original_copy1);
     if (DPLLsolve(&original_copy1)) {
         debug("DPLLsolve: 1\n");
         return 1;
@@ -373,6 +398,7 @@ int CNF_reader(char input_filename[], char output_filename[]) {
         while (fscanf(fin, "%d", &value)) {
             if (value == 0) break;
             new_ClauseHead_node->size++;
+            debug("new_ClauseHead_node->size == %d\n", new_ClauseHead_node->size);
             VarNode* new_VarNode = NULL;
             VarNode_init(&new_VarNode);
             new_VarNode->value = value;
@@ -386,6 +412,12 @@ int CNF_reader(char input_filename[], char output_filename[]) {
         }
         ClauseHead_push(&head, new_ClauseHead_node);
     }
+    for (int i = 0; i <= 999; i++) {
+        if (frequency[i]) {
+            debug("frequency[%d]: %d ", i, frequency[i]);
+        }
+    }
+    debug("\n");
     double start = clock();
     FILE* fp = fopen(output_filename, "w");
     if (!fp) {
@@ -393,22 +425,22 @@ int CNF_reader(char input_filename[], char output_filename[]) {
         return 0;
     }
     if (DPLLsolve(&head)) {
+        fprintf(fp, "1\n");
         double end = clock();
         double time_elapsed = end - start;
-        int cnt = 0;
         for (int i = 111; i <= 999; i++) {
             if (bool_value[i]) {
                 fprintf(fp, "%d ", bool_value[i] * i);
-                cnt++;
-                if (cnt % 10 == 0) fprintf(fp, "\n");
             }
         }
-        fprintf(fp, "time elapsed: %lf\n", time_elapsed);
+        fprintf(fp, "\n");
+        fprintf(fp, "time elapsed: %.17lfms\n", time_elapsed);
     } else {
+        fprintf(fp, "0\n");
         fprintf(fp, "no solution!\n");
         double end = clock();
         double time_elapsed = end - start;
-        fprintf(fp, "time elapsed: %lf\n", time_elapsed);
+        fprintf(fp, "time elapsed: %.17lfms\n", time_elapsed);
     }
     fclose(fin);
     fclose(fp);
@@ -420,8 +452,13 @@ void test01() {
     CNF_reader("test1.txt", "test1.res");
 }
 
+void test02() {
+    CNF_reader("test2.txt", "test2.res");
+}
+
 int main() {
     global_init();
     test01();
+    test02();
     return 0;
 }
