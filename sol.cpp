@@ -2,9 +2,15 @@
 
 using namespace std;
 
+#ifndef ONLINE_JUDGE
+#include "d:/coding/debug.h"
+#else
+#define debug(...) 114514;
+#endif
+
 int main() {
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
        
     return 0;
 }
