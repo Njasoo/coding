@@ -52,7 +52,7 @@ int existEmptyClause(ClauseHead* node) { // 查找是否存在空子句
 
 // 选择出现频次最多的变量来赋值, 这样也许能够使子句集的长度缩小速度快一点
 // 然后再根据正值和负值的出现频次, 选择频次较高的作为优化
-int choose_unit_value(ClauseHead* node) {
+int choose_unit_value1(ClauseHead* node) {
     debug("enter choose_unit_value\n");
     int max_frequency = 0, most_frequent_value = 0;
     ClauseHead* p = node;
@@ -74,6 +74,31 @@ int choose_unit_value(ClauseHead* node) {
         debug("choose_unit_value: %d\n", -most_frequent_value);
         return -most_frequent_value;
     }
+}
+
+int choose_unit_value2(ClauseHead* node) {
+    ClauseHead* p = node;
+    int min_all_positive_clause_length = (int) 1e9;
+    int res = 0;
+    while (p) {
+        VarNode* pp = p->var_list;
+        int all_positive = 1;
+        while (pp) {
+            if (pp->value < 0) {
+                all_positive = 0;
+                break;
+            }
+            pp = pp->next;
+        }
+        if (all_positive == 1) {
+            if (p->size < min_all_positive_clause_length) {
+                min_all_positive_clause_length = p->size;
+                res = p->var_list->value;
+            }
+        }
+        p = p->next;
+    }
+    return res;
 }
 
 int add_unit_as_clause(ClauseHead** head, int unit_value) {
@@ -98,7 +123,7 @@ long long max_len;
 //     return b;
 // }
 
-int DPLLsolve(ClauseHead** node) {
+int DPLLsolve(ClauseHead** node, int flag) {
     tot++;
     debug("enter DPLLsolve\n");
     ClauseHead* p = NULL;
@@ -127,7 +152,14 @@ int DPLLsolve(ClauseHead** node) {
             return 0;
         }
     }
-    unit_value = choose_unit_value(*node);
+    if (!flag) {
+        unit_value = choose_unit_value2(*node);
+        if (unit_value == 0) {
+            unit_value = choose_unit_value1(*node);
+        }
+    } else {
+        unit_value = choose_unit_value1(*node);
+    }
     debug("unit_value: %d\n", unit_value);
     bool_value[abs(unit_value)] = unit_value > 0 ? 1 : -1; // 第一个赋值选择, 正值为true, 赋值为false
                                                             // 关键是正值为true的时候, 就已经可以知道这一个格子填什么数字, 所以先走这一条路
@@ -138,7 +170,7 @@ int DPLLsolve(ClauseHead** node) {
     add_unit_as_clause(&original_copy1, unit_value); // 将变量作为单子句加入子句集中, 然后递归地解决这个问题
     // debug("original_copy1(after adding unite_clause): \n");
     // print_CNF(original_copy1);
-    if (DPLLsolve(&original_copy1)) {
+    if (DPLLsolve(&original_copy1, flag)) {
         // debug("DPLLsolve: 1\n");
         return 1;
     }
@@ -158,7 +190,7 @@ int DPLLsolve(ClauseHead** node) {
     // max_len = max(FULL_length(original_copy2), max_len);
     // return DPLLsolve(&original_copy2);
     // int res = DPLLsolve(&original_copy2);
-    int res = DPLLsolve(&original_copy2);
+    int res = DPLLsolve(&original_copy2, flag);
     if (res) {
         debug("DPLLsolve: 1\n");
     } else {
@@ -169,6 +201,11 @@ int DPLLsolve(ClauseHead** node) {
 
 int global_init() {
     debug("enter global_init\n");
+    for (int i = 0; i < 105; i++) {
+        for (int j = 0; j < 105; j++) {
+            dont_change[i][j] = 0;
+        }
+    }
     for (int i = 0; i < 10005; i++) {
         frequency[i] = 0;
         possitive_frequency[i] = 0;
@@ -225,7 +262,7 @@ int global_init() {
     return 1;
 }
 
-int CNF_reader(char input_filename[], char output_filename[]) {
+int CNF_reader(char input_filename[], char output_filename[], int flag) {
     debug("enter CNF_reader\n");
     FILE* fin = fopen(input_filename, "r");
     if (!fin) {
@@ -261,64 +298,30 @@ int CNF_reader(char input_filename[], char output_filename[]) {
     }
     debug("head:\n");
     print_CNF(head);
-    // int first_value;
-    // while (fscanf(fin, "%d", &first_value) != EOF) {
-    //     ClauseHead* new_ClauseHead_node = NULL;
-    //     ClauseHead_init(&new_ClauseHead_node);
-    //     new_ClauseHead_node->size = 1;
-    //     VarNode* temp_VarNode = NULL;
-    //     VarNode_init(&temp_VarNode);
-    //     temp_VarNode->value = first_value;
-    //     frequency[abs(first_value)]++;
-    //     if (first_value > 0) {
-    //         possitive_frequency[first_value]++;
-    //     } else {
-    //         negative_frequency[-first_value]++;
-    //     }
-    //     VarNode_push(&new_ClauseHead_node->var_list, temp_VarNode);
-    //     int value;
-    //     while (fscanf(fin, "%d", &value) != EOF) {
-    //         if (value == 0) break;
-    //         VarNode* new_VarNode = NULL;
-    //         VarNode_init(&new_VarNode);
-    //         new_VarNode->value = value;
-    //         new_ClauseHead_node->size++;
-    //         VarNode_push(&new_ClauseHead_node->var_list, new_VarNode);
-    //         frequency[abs(value)]++;
-    //         if (value > 0) possitive_frequency[value]++;
-    //         else negative_frequency[-value]++;
-    //     }
-    //     ClauseHead_push(&head, new_ClauseHead_node);
-    // }
-    // for (int i = 0; i <= 999; i++) {
-    //     if (frequency[i]) {
-    //         debug("frequency[%d]: %d ", i, frequency[i]);
-    //     }
-    // }
-    // debug("\n");
     double start = clock();
     FILE* fp = fopen(output_filename, "w");
     if (!fp) {
         debug("CNF_reader: 0\n");
         return 0;
     }
-    if (DPLLsolve(&head)) {
-        fprintf(fp, "1\n");
+    if (DPLLsolve(&head, flag)) {
+        fprintf(fp, "s 1\n");
         double end = clock();
         double time_elapsed = end - start;
+        fprintf(fp, "v ");
         for (int i = 0; i < 100005; i++) {
             if (bool_value[i]) {
                 fprintf(fp, "%d ", bool_value[i] * i);
             }
         }
         fprintf(fp, "\n");
-        fprintf(fp, "time elapsed: %.17lfms\n", time_elapsed);
+        fprintf(fp, "t %.17lfms\n", time_elapsed);
     } else {
-        fprintf(fp, "0\n");
-        fprintf(fp, "no solution!\n");
+        fprintf(fp, "s 0\n");
+        // fprintf(fp, "no solution!\n");
         double end = clock();
         double time_elapsed = end - start;
-        fprintf(fp, "time elapsed: %.17lfms\n", time_elapsed);
+        fprintf(fp, "t %.17lfms\n", time_elapsed);
     }
     fclose(fin);
     fclose(fp);

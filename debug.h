@@ -1,6 +1,6 @@
-vector<string> vec_splitter(string s) {
+std::vector<std::string> vec_splitter(std::string s) {
     s += ',';
-    vector<string> res;
+    std::vector<std::string> res;
     while (!s.empty()) {
         res.push_back(s.substr(0, s.find(',')));
         s = s.substr(s.find(',') + 1);
@@ -8,15 +8,15 @@ vector<string> vec_splitter(string s) {
     return res;
 }
 
-void debug_out(vector<string> __attribute__((unused)) args, // __attribute__((unused)): avoid warning
+void debug_out(std::vector<std::string> __attribute__((unused)) args, // __attribute__((unused)): avoid warning
 __attribute__((unused)) int idx,
-__attribute__((unused)) int LINE_NUM) { cerr << endl; }
+__attribute__((unused)) int LINE_NUM) { std::cerr << std::endl; }
 
 template<typename Head, typename... Tail>
-void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
-    if (idx > 0) cerr << ", "; else cerr << "Line(" << LINE_NUM << ") ";
-    stringstream ss; ss << H;
-    cerr << args[idx] << " == " << ss.str(); // str() temporary string
+void debug_out(std::vector<std::string> args, int idx, int LINE_NUM, Head H, Tail... T) {
+    if (idx > 0) std::cerr << ", "; else std::cerr << "Line(" << LINE_NUM << ") ";
+    std::stringstream ss; ss << H;
+    std::cerr << args[idx] << " == " << ss.str(); // str() temporary std::string
     debug_out(args, idx + 1, LINE_NUM, T...);
 }
 
