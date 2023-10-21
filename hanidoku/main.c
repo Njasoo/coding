@@ -23,30 +23,6 @@ int print_res(char filename[]) {
     return 1;
 }
 
-// void test01() {
-//     CNF_reader("matrix_1.cnf", "matrix_1.res", 1);
-// }
-
-// void test02() {
-//     CNF_reader("problem_2.cnf", "problem_2.res", 1);
-// }
-
-// void test03() {
-//     CNF_reader("problem_3.cnf", "problem_3.res", 0);
-// }
-
-// void test04() {
-//     CNF_reader("ec-vda_gr_rcs_w9.shuffled-6498.cnf", "ec-vda_gr_rcs_w9.shuffled-6498.res");
-// }
-
-// void test05() {
-//     CNF_reader("problem_12.cnf", "problem_12.res");
-// }
-
-// void test06() {
-//     CNF_reader("eh-dp04s04.shuffled-1075.cnf", "eh-dp04s04.shuffled-1075.res");
-// }
-
 void real_test01() {
     CNF_reader("1.cnf", "1.res", 1);
     print_res("1.res");
@@ -341,98 +317,98 @@ int main() {
     // global_init();
     // CNF_reader("6.cnf", "6.res");
 
-    // int random_number = 0;
-    // while (1) {
-    //     global_init();
-    //     system("cls");
-    //     printf("////////// HANIDOKU & SAT //////////\n");
-    //     printf("---------------------------------\n");
-    //     printf("\t1. Solve SAT\n");
-    //     printf("\t2. Play game\n");
-    //     printf("---------------------------------\n");
-    //     int op;
-    //     scanf("%d", &op);
-    //     if (op == 1) {
-    //         printf("input test number: ");
-    //         int test;
-    //         scanf("%d", &test);
-    //         if (test == 1) {
-    //             real_test01();
-    //         } else if (test == 2) {
-    //             real_test02();
-    //         } else if (test == 3) {
-    //             real_test03();
-    //         } else if (test == 4) {
-    //             real_test04();
-    //         } else if (test == 5) {
-    //             real_test05();
-    //         } else if (test == 6) {
-    //             real_test06();
-    //         } else if (test == 7) {
-    //             real_test07();
-    //         } else if (test == 8) {
-    //             real_test08();
-    //         } else if (test == 9) {
-    //             real_test09();
-    //         } else if (test == 10) {
-    //             real_test10();
-    //         } else if (test == 11) {
-    //             real_test11();
-    //         } else if (test == 12) {
-    //             real_test12();
-    //         }
-    //     } else if (op == 2) {
-    //         game_start = 1;
-    //         while (game_start) {
-    //             global_init();
-    //             char folder_name[105];
-    //             strcpy(folder_name, "matrixs/");
-    //             int range_l = 1, range_r = 20;
-    //             if (random_switch == 1) {
-    //                 random_number = rand() % (range_r - range_l + 1) + range_l;
-    //                 random_switch = 0;
-    //             }
-    //             if (random_number == 0) {
-    //                 display("matrixs/0");
-    //                 continue;
-    //             }
-    //             char filename[105];
-    //             if (random_number >= 10) {
-    //                 filename[0] = random_number / 10 % 10 + '0';
-    //                 filename[1] = random_number % 10 + '0';
-    //                 filename[2] = '\0';
-    //             } else {
-    //                 filename[0] = random_number + '0';
-    //                 filename[1] = '\0';
-    //             }
-    //             char real_filename[105];
-    //             strcpy(real_filename, folder_name);
-    //             strcat(real_filename, filename);
-    //             char suffix[15];
-    //             strcpy(suffix, ".txt");
-    //             char now_in_filename[105];
-    //             strcpy(now_in_filename, real_filename);
-    //             strcat(now_in_filename, suffix);
-    //             FILE* fin = fopen(now_in_filename, "r");
-    //             for (int i = 1; i <= 9; i++) {
-    //                 for (int j = 1; j <= row_length[i]; j++) {
-    //                     int num;
-    //                     fscanf(fin, "%d", &num);
-    //                     f[i][j] = num;
-    //                     if (f[i][j] != 0) dont_change[i][j] = 1;
-    //                     int x = hs2[i][j].x;
-    //                     int y = hs2[i][j].y;
-    //                     if (num == 0) screen[x][y] = '.';
-    //                     else screen[x][y] = num + '0';
-    //                 }
-    //             }
-    //             fclose(fin);
-    //             display(real_filename);
-    //         }
-    //     }
-    // }
-    global_init();
-    // CNF_reader("M/tst_v200_c210.cnf", "M/tst_v200_c210.res", 0);
-    // CNF_reader("L/ec-iso-ukn009.shuffled-as.sat05-3632-1584.cnf","L/ec-iso-ukn009.shuffled-as.sat05-3632-1584.res",0);
+    int random_number = 0;
+    while (1) {
+        global_init();
+        system("cls");
+        printf("////////// HANIDOKU & SAT //////////\n");
+        printf("---------------------------------\n");
+        printf("\t1. Solve SAT\n");
+        printf("\t2. Play game\n");
+        printf("---------------------------------\n");
+        int op;
+        scanf("%d", &op);
+        if (op == 1) {
+            printf("input test number: ");
+            int test;
+            scanf("%d", &test);
+            if (test == 1) {
+                real_test01();
+            } else if (test == 2) {
+                real_test02();
+            } else if (test == 3) {
+                real_test03();
+            } else if (test == 4) {
+                real_test04();
+            } else if (test == 5) {
+                real_test05();
+            } else if (test == 6) {
+                real_test06();
+            } else if (test == 7) {
+                real_test07();
+            } else if (test == 8) {
+                real_test08();
+            } else if (test == 9) {
+                real_test09();
+            } else if (test == 10) {
+                real_test10();
+            } else if (test == 11) {
+                real_test11();
+            } else if (test == 12) {
+                real_test12();
+            }
+        } else if (op == 2) {
+            game_start = 1;
+            while (game_start) {
+                global_init();
+                char folder_name[105];
+                strcpy(folder_name, "matrixs/");
+                int range_l = 1, range_r = 20;
+                if (random_switch == 1) {
+                    random_number = rand() % (range_r - range_l + 1) + range_l;
+                    random_switch = 0;
+                }
+                if (random_number == 0) {
+                    display("matrixs/0");
+                    continue;
+                }
+                char filename[105];
+                if (random_number >= 10) {
+                    filename[0] = random_number / 10 % 10 + '0';
+                    filename[1] = random_number % 10 + '0';
+                    filename[2] = '\0';
+                } else {
+                    filename[0] = random_number + '0';
+                    filename[1] = '\0';
+                }
+                char real_filename[105];
+                strcpy(real_filename, folder_name);
+                strcat(real_filename, filename);
+                char suffix[15];
+                strcpy(suffix, ".txt");
+                char now_in_filename[105];
+                strcpy(now_in_filename, real_filename);
+                strcat(now_in_filename, suffix);
+                FILE* fin = fopen(now_in_filename, "r");
+                for (int i = 1; i <= 9; i++) {
+                    for (int j = 1; j <= row_length[i]; j++) {
+                        int num;
+                        fscanf(fin, "%d", &num);
+                        f[i][j] = num;
+                        if (f[i][j] != 0) dont_change[i][j] = 1;
+                        int x = hs2[i][j].x;
+                        int y = hs2[i][j].y;
+                        if (num == 0) screen[x][y] = '.';
+                        else screen[x][y] = num + '0';
+                    }
+                }
+                fclose(fin);
+                display(real_filename);
+            }
+        }
+    }
+    // global_init();
+    // // CNF_reader("M/tst_v200_c210.cnf", "M/tst_v200_c210.res", 0);
+    // // CNF_reader("L/ec-iso-ukn009.shuffled-as.sat05-3632-1584.cnf","L/ec-iso-ukn009.shuffled-as.sat05-3632-1584.res",0);
     return 0;
 }
