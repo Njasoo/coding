@@ -1,12 +1,106 @@
-$$
-f tan\theta _0 = d\\
-\theta _0 \rightarrow 0\\
-tan \theta _0 \sim \theta _0
-$$
 
 $$
-d = 2ftan(\theta_0/2)\\
-\theta_0 很小，所以tan(\theta_0/2)近似地等于\theta_0/2\\
-所以d=2ftan(\theta_0/2)=2f*\frac{\theta_0}{2}=f\theta_0
+Z = \bar{Q_2} \bar{x_1}\\
+T_1 = x_2 \quad T_2 = Q_1x_2\bar{x_1}
 $$
+
+所以这是一个Mealy型电路
+
+次态真值表
+输入<br>$x_2 \quad x_1$|现态<br>$Q_2\quad Q_1$|激励函数<br>$T_2 \quad T_1$|次态<br> $Q_2^{n+1} \quad Q_1^{n+1}$|输出<br>$Z$
+---|---|---|---|---
+$0 \quad 0$ | $0 \quad 0$ | $0 \quad 0$ | $0 \quad 0$ | 1
+$0 \quad 0$ | $0 \quad 1$ | $0 \quad 0$ | $0 \quad 1$ | 1
+$0 \quad 0$ | $1 \quad 0$ | $0 \quad 0$ | $1 \quad 0$ | 0
+$0 \quad 0$ | $1 \quad 1$ | $0 \quad 0$ | $1 \quad 1$ | 0
+$0 \quad 1$ | $0 \quad 0$ | $0 \quad 0$ | $0 \quad 0$ | 0
+$0 \quad 1$ | $0 \quad 1$ | $0 \quad 0$ | $0 \quad 1$ | 0 
+$0 \quad 1$ | $1 \quad 0$ | $0 \quad 0$ | $1 \quad 0$ | 0 
+$0 \quad 1$ | $1 \quad 1$ | $0 \quad 0$ | $1 \quad 1$ | 0
+$1 \quad 0$ | $0 \quad 0$ | $0 \quad 1$ | $0 \quad 1$ | 1
+$1 \quad 0$ | $0 \quad 1$ | $1 \quad 1$ | $1 \quad 0$ | 1
+$1 \quad 0$ | $1 \quad 0$ | $0 \quad 1$ | $1 \quad 1$ | 0
+$1 \quad 0$ | $1 \quad 1$ | $1 \quad 1$ | $0 \quad 0$ | 0
+$1 \quad 1$ | $0 \quad 0$ | $0 \quad 1$ | $0 \quad 1$ | 0
+$1 \quad 1$ | $0 \quad 1$ | $0 \quad 1$ | $0 \quad 0$ | 0
+$1 \quad 1$ | $1 \quad 0$ | $0 \quad 1$ | $1 \quad 1$ | 0
+$1 \quad 1$ | $1 \quad 1$ | $0 \quad 1$ | $1 \quad 0$ | 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

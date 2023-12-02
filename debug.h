@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-
 std::vector<std::string> vec_splitter(std::string s) {
     s += ',';
     std::vector<std::string> res;
@@ -17,8 +15,7 @@ __attribute__((unused)) int LINE_NUM) { std::cerr << std::endl; }
 template<typename Head, typename... Tail>
 void debug_out(std::vector<std::string> args, int idx, int LINE_NUM, Head H, Tail... T) {
     if (idx > 0) std::cerr << ", "; else std::cerr << "Line(" << LINE_NUM << ") ";
-    std::stringstream ss; ss << H;
-    std::cerr << args[idx] << " == " << ss.str(); // str() temporary std::string
+    std::cerr << args[idx] << " == " << H; // str() temporary std::string
     debug_out(args, idx + 1, LINE_NUM, T...);
 }
 
