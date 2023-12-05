@@ -15,7 +15,7 @@ using namespace std;
 #define debug(...) 114514
 #endif
 
-const int N = 1005;
+const int N = 55;
 long long f[N], d[N], t[N], sum[N], ans[N], real_ans[N];
 long long n, h, tot_ans, max_ans;
 struct Node {
@@ -61,13 +61,8 @@ long long solve(int num) {
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int first = 1;
     while (cin >> n) {
         if (n == 0) break;
-        if (!first) {
-            cout << "\n\n";
-            first = 0;
-        }
         max_ans = 0;
         cin >> h;
         h = h * 60 / 5;
@@ -118,7 +113,7 @@ int main() {
             cout << real_ans[i] * 5 << ", ";    
         }
         cout << real_ans[n] * 5 << '\n';
-        cout << "Number of fish expected: " << max_ans;
+        cout << "Number of fish expected: " << max_ans << "\n\n";
     }   
     return 0;
 }
