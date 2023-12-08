@@ -1,119 +1,93 @@
-#include <iostream>
-#include <cstdio>
-#include <algorithm>
-#include <cstring>
-#include <string>
-#include <cmath>
-#include <vector>
-#include <queue>
-
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#define INF 0x3f3f3f 
 using namespace std;
-
-#ifdef LOCAL
-#include "d:/coding/debug.h"
-#else
-#define debug(...) 114514
-#endif
-
-const int N = 55;
-long long f[N], d[N], t[N], sum[N], ans[N], real_ans[N];
-long long n, h, tot_ans, max_ans;
-struct Node {
-    long long _f, _d, _id;
-
-    bool operator<(const Node& rhs) const {
-        if (_f == rhs._f) {
-            return _id > rhs._id;
+int use[30];//记录当前取法的第i种面值取的个数 
+struct node
+{
+    int v,b;
+}a[25];
+ 
+int cmp(node a,node b)
+{
+    return a.v<b.v;
+} 
+ 
+int main()
+{
+    int n,c,i,cnt,ans,k,m;
+    while(scanf("%d%d",&n,&c)!=EOF)
+    {
+        for(i=0;i<n;++i)
+            scanf("%d%d",&a[i].v,&a[i].b);
+        sort(a,a+n,cmp);
+        ans=0;
+        for(i=n-1;i>=0;i--)//第一步，满足大于C的面值全部取走 
+        {
+            if(a[i].v>=c)
+            {
+                ans+=a[i].b;
+                a[i].b=0;
+            }
         }
-        return _f < rhs._f;
-    }
-};
-
-long long solve(int num) {
-    long long now_time = h;
-    now_time -= sum[num - 1];
-    priority_queue<Node> q;
-    for (int i = 1; i <= num; i++) {
-        Node temp;
-        temp._f = f[i];
-        temp._d = d[i];
-        temp._id = i;
-        q.push(temp);
-    }
-    long long res = 0;
-    while (now_time > 0 && !q.empty()) {
-        Node u = q.top();
-        q.pop();
-        long long _f = u._f, _d = u._d, _id = u._id;
-        // debug(_f);
-        now_time--;
-        ans[_id]++;
-        res += _f;
-        Node temp;
-        temp._f = max(_f - _d, 0LL);
-        temp._d = _d;
-        temp._id = _id;
-        q.push(temp);
-    }
-    return res;
-}
-
-int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    while (cin >> n) {
-        if (n == 0) break;
-        max_ans = 0;
-        cin >> h;
-        h = h * 60 / 5;
-        // debug(h);
-        // f[i] - t / 5 * d[i] >= 0
-        // t / 5 * d[i]  <= f[i]
-        // t <= f[i] / d[i] * 5
-        for (int i = 1; i <= n; i++) {
-            cin >> f[i];
-        }
-        for (int i = 1; i <= n; i++) {
-            cin >> d[i];
-        }
-        for (int i = 1; i < n; i++) {
-            cin >> t[i];
-            sum[i] = sum[i - 1] + t[i];
-        }
-        for (int i = 1; i <= n; i++) {
-            memset(ans, 0, sizeof ans);
-            int res = solve(i);
-            // debug(i, res);  
-            // debug(res);
-            if (res > max_ans) {
-                max_ans = res;
-                for (int j = 1; j <= n; j++) {
-                    real_ans[j] = ans[j];
-                }   
-            } else if (res == max_ans) {
-                bool ok = 0;
-                for (int j = 1; j <= n; j++) {
-                    if (ans[j] == real_ans[j]) {
-                        continue;
-                    } else if (ans[j] > real_ans[j]) {
-                        ok = 1;
+        while(1)//每次循环都在找一次当前最优取法，直到剩下的总金额小于C元 
+        {
+            int sign=0;
+            cnt=c;
+            memset(use,0,sizeof(use));
+            for(i=n-1;i>=0;--i)//第二步，从大到小取，不能超过C的值 
+            {
+                if(a[i].b)
+                {
+                    k=cnt/a[i].v;
+                    m=min(k,a[i].b);
+                    cnt-=m*a[i].v;
+                    use[i]=m;
+                    if(cnt==0)
+                    {
+                        sign=1;
                         break;
-                    } else if (ans[j] < real_ans[j]) {
-                        break;
-                    }
-                }
-                if (ok) {
-                    for (int j = 1; j <= n; j++) {
-                        real_ans[j] = ans[j];
                     }
                 }
             }
+            if(cnt>0)
+            {
+                for(i=0;i<n;++i)//第三步，从小到大取，凑满C 
+                {
+                    if(a[i].b>use[i])
+                    {
+                        while(use[i]<a[i].b)
+                        {
+                            cnt-=a[i].v;
+                            use[i]++;
+                            if(cnt<=0)
+                            {
+                                sign=1;
+                                break;
+                            }
+                        }
+                    }
+                    if(sign)
+                        break;
+                }
+            }
+            if(!sign)
+                break;
+            m=INF;
+            for(i=0;i<n;++i)
+            {
+                if(use[i])//找到当前取法的能取的总次数 
+                    m=min(m,a[i].b/use[i]);
+            }
+            ans+=m;
+            for(i=0;i<n;++i)
+            {
+                if(use[i])
+                    a[i].b-=m*use[i];
+            } 
         }
-        for (int i = 1; i < n; i++) {
-            cout << real_ans[i] * 5 << ", ";    
-        }
-        cout << real_ans[n] * 5 << '\n';
-        cout << "Number of fish expected: " << max_ans << "\n\n";
-    }   
+        printf("%d\n",ans);
+    }
     return 0;
 }

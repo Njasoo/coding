@@ -11,6 +11,9 @@ if len(V_H)==len(I_M):
 else:
     print("NO")
 
+slope, intercept = np.polyfit(I_M, V_H, 1)
+print(slope, intercept)
+
 plt.title('V_H与I_M表')
 plt.xlabel('I_M(mA)')
 plt.ylabel('V_H(mV)')
