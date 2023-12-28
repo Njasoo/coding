@@ -1,3 +1,5 @@
+#include <bits/stdc++.h>
+
 std::vector<std::string> vec_splitter(std::string s) {
     s += ',';
     std::vector<std::string> res;

@@ -7,7 +7,7 @@
 #include <vector>
 #include <queue>
 
-using namespace std;
+using namespace std; 
 
 const int N = 105;
 long long f[N][N], sum[N][N], dp[N];
