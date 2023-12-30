@@ -13,12 +13,12 @@ int main(){
     vector<int> ans;
     int real_xiebian_2=a*a+b*b;
     // cerr<<"real_xiebian="<<real_xiebian_2<<endl;
-    for(int x1=-1000;x1<=-1;x1++){
+    for(int x1=-1000;x1<=0;x1++){
         int y1_2=a*a-x1*x1;
         if(y1_2<0)continue;
         if(!isq(y1_2))continue;
         int y1=sqrt(y1_2);
-        for(int x2=1;x2<=1000;x2++){
+        for(int x2=0;x2<=1000;x2++){
             int y2_2=b*b-x2*x2;
             if(y2_2<0)continue;
             if(!isq(y2_2))continue;
