@@ -1,5 +1,3 @@
-const int MOD = 998244353;
-
 template<class T>
 T power(T a, int64_t b) {
     assert(b >= 0);
@@ -15,148 +13,116 @@ T power(T a, int64_t b) {
 class ModInt {
 private:
     int64_t _x;
-
 public:
     int64_t val() {
         return normalize(_x);
     }
-
     int64_t normalize(int64_t x) {
         if (x >= MOD) x -= MOD;
         if (x < 0) x += MOD;
         return x;
     }
-
     ModInt() : _x(0) {}
-
     ModInt(int64_t rhs) {
         _x = normalize(rhs);
     }
-
     ModInt& operator=(int64_t rhs) {
         *this = ModInt(rhs);
         return *this;
     }
-
     ModInt operator+(int64_t rhs) {
         return ModInt(this->val() + rhs);
     }
-
     ModInt operator+(ModInt rhs) {
         return ModInt(this->val() + rhs.val());
     }
-
     ModInt& operator+=(int64_t rhs) {
         *this = *this + rhs;
         return *this;
     }
-
     ModInt& operator+=(ModInt rhs) {
         *this = *this + rhs.val();
         return *this;
     }
-
     ModInt& operator++(int) {
         *this += 1;
         return *this;
     }
-
     ModInt& operator++() {
         *this += 1;
         return *this;
     }
-
     ModInt operator*(int64_t rhs) {
         return ModInt(this->val() * rhs % MOD);
     }
-
     ModInt operator*(ModInt rhs) {
         return ModInt(this->val() * rhs.val() % MOD);
     }
-
     ModInt& operator*=(int64_t rhs) {
         *this = *this * rhs;
         return *this;
     }
-
     ModInt& operator*=(ModInt rhs) {
         *this = *this * rhs;
         return *this;
     }
-
     ModInt operator-(int64_t rhs) {
         return ModInt(this->val() - rhs);
     }
-
     ModInt operator-(ModInt rhs) {
         return ModInt(this->val() - rhs.val());
     }
-
     ModInt& operator-=(int64_t rhs) {
         *this = *this - rhs;
         return *this;
     }
-
     ModInt& operator-=(ModInt rhs) {
         *this = *this - rhs;
         return *this;
     }
-
     ModInt& operator--(int) {
         *this -= 1;
         return *this;
     }
-
     ModInt& operator--() {
         *this -= 1;
         return *this;
     }
-
     ModInt inv() {
         assert(_x != 0);
         return power(_x, MOD - 2);
     }
-
     ModInt operator/(int64_t rhs) {
         return ModInt(*this * ModInt(rhs).inv());
     }
-
     ModInt operator/(ModInt rhs) {
         return ModInt(*this / rhs.val());
     }
-
     ModInt& operator/=(int64_t rhs) {
         *this = *this / rhs;
         return *this;
     }
-
     ModInt& operator/=(ModInt rhs) {
         *this = *this / rhs;
         return *this;
     }
-
-    friend istream& operator>>(istream& in, ModInt& rhs) {
+    friend std::istream& operator>>(std::istream& in, ModInt& rhs) {
         in >> rhs._x;
         return in;
     }
-
-    friend ostream& operator<<(ostream& out, ModInt rhs) {
+    friend std::ostream& operator<<(std::ostream& out, ModInt rhs) {
         out << rhs.val();
         return out;
     }
-
     friend bool operator==(ModInt lhs, int64_t rhs) {
         return lhs.val() == rhs;
     }
-
     friend bool operator==(ModInt lhs, ModInt rhs) {
         return lhs.val() == rhs.val();
     }
-
     friend bool operator!=(ModInt lhs, int64_t rhs) {
         return !(lhs == rhs);
     }
-
     friend bool operator!=(ModInt lhs, ModInt rhs) {
         return !(lhs == rhs);
     }
@@ -167,7 +133,7 @@ using M = ModInt;
 // class Comb {
 // private:
 //     int _n;
-//     vector<M> _fac, _inv_fac;
+//     std::vector<M> _fac, _inv_fac;
 
 // public:
 //     Comb(int MAXN) : _n(MAXN), _fac(MAXN + 1), _inv_fac(MAXN + 1) {
