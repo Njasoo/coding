@@ -6,11 +6,74 @@
         "cmath": "cpp",
         "complex": "cpp",
         "valarray": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "vector": "cpp",
+        "utility": "cpp"
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
     },
     "python.formatting.provider": "none",
-    "C_Cpp.clang_format_style": "{ BasedOnStyle: Chromium, IndentWidth: 4}",
+    // "C_Cpp.clang_format_style": "{ BasedOnStyle: Chromium, IndentWidth: 4}",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "xelatex",
+            "tools": [
+                "xelatex"
+            ]
+        },
+        {
+            "name": "pdflatex",
+            "tools": [
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "xelatex->bibtex->xelatex*2",
+            "tools": [
+                "xelatex",
+                "bibtex",
+                "xelatex",
+                "xelatex"
+            ]
+        },
+        {
+            "name": "pdflatex->bibtex->pdflatex*2",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xelatex",
+            "command": "C:\\texlive\\2018\\bin\\win32\\xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-shell-escape",
+                "%DOC%.tex"
+            ]
+        },
+        {
+            "name": "pdflatex",
+            "command": "C:\\texlive\\2018\\bin\\win32\\pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "bibtex",
+            "command": "C:\\texlive\\2018\\bin\\win32\\bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
+        }
+    ],
 }

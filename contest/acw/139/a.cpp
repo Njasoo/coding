@@ -6,6 +6,9 @@
 #include <vector>
 #include <cassert>
 #include <map>
+#include <numeric>
+#include <iomanip>
+#include <set>
 
 using namespace std;
 
@@ -13,8 +16,14 @@ using namespace std;
 #define el cerr << endl
 
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
+    if (a + b < c + d) {
+        cout << "YES\n";
+    } else {
+        cout << "NO\n";
+    }
     return 0;
 }
