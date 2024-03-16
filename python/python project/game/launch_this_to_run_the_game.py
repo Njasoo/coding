@@ -8,7 +8,8 @@ from game_stats import GameStats
 from time import sleep
 from button import Button
 from scoreboard import ScoreBoard
- 
+
+
 class AlienInvasion:
     def __init__(self):
         pygame.init()
@@ -49,7 +50,7 @@ class AlienInvasion:
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
-            self.ship.moving_left = False    
+            self.ship.moving_left = False
 
     def _ship_hit(self):
         if self.stats.ship_left > 1:
@@ -63,7 +64,7 @@ class AlienInvasion:
         else:
             self.stats.game_active = False
             pygame.mouse.set_visible(True)
-    
+
     def _check_aliens_bottom(self):
         screen_rect = self.screen.get_rect()
         for alien in self.aliens.sprites():
@@ -89,7 +90,7 @@ class AlienInvasion:
     def _fire_bullet(self):
         if len(self.bullets) < self.settings.bullet_allow:
             new_bullet = Bullet(self)
-            self.bullets.add(new_bullet)   
+            self.bullets.add(new_bullet)
 
     def _update_bullets(self):
         self.bullets.update()
@@ -101,11 +102,11 @@ class AlienInvasion:
 
     def _check_bullet_alien_collisions(self):
         collisions = pygame.sprite.groupcollide(self.bullets,
-            self.aliens, False, True) # True means delete
+                                                self.aliens, False, True)  # True means delete
         if collisions:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)
-            self.sb.prep_score()   
+            self.sb.prep_score()
             self.sb.check_high_score()
         if not self.aliens:
             self.bullets.empty()
@@ -113,27 +114,34 @@ class AlienInvasion:
             self.settings.increse_speed()
             self.stats.level += 1
             if self.stats.level == 3:
-                self.ship.image = pygame.image.load('images/senpai_144x107.gif')
-                self.settings.bullet_width, self.settings.bullet_height = 2 * self.settings.bullet_width, 2 * self.settings.bullet_height
-            if self.stats.level == 5: 
+                self.ship.image = pygame.image.load(
+                    'images/senpai_144x107.gif')
+                self.settings.bullet_width, self.settings.bullet_height = 2 * \
+                    self.settings.bullet_width, 2 * self.settings.bullet_height
+            if self.stats.level == 5:
                 self.ship.image = pygame.image.load('images/images_127x94.jpg')
-                self.settings.bullet_width, self.settings.bullet_height = 2 * self.settings.bullet_width, 2 * self.settings.bullet_height
+                self.settings.bullet_width, self.settings.bullet_height = 2 * \
+                    self.settings.bullet_width, 2 * self.settings.bullet_height
             if self.stats.level == 7:
-                self.ship.image = pygame.image.load('images/senpai_level7_142x117.jpg')
-                self.settings.bullet_width, self.settings.bullet_height = 2 * self.settings.bullet_width, 2 * self.settings.bullet_height
+                self.ship.image = pygame.image.load(
+                    'images/senpai_level7_142x117.jpg')
+                self.settings.bullet_width, self.settings.bullet_height = 2 * \
+                    self.settings.bullet_width, 2 * self.settings.bullet_height
             self.sb.prep_level()
- 
+
     def _create_fleet(self):
         alien = Alien(self)
         alien_width, alien_height = alien.rect.size
         available_space_x = self.settings.screen_width - (2 * alien_width)
         number_aliens_x = available_space_x // (2 * alien_width)
         ship_height = self.ship.rect.height
-        available_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)
+        available_space_y = (self.settings.screen_height -
+                             (3 * alien_height) - ship_height)
         number_rows = available_space_y // (2 * alien_height)
         for row_number in range(number_rows):
             for alien_number in range(number_aliens_x):
-                self._create_alien(alien_number, row_number) # make the current screen visible
+                # make the current screen visible
+                self._create_alien(alien_number, row_number)
 
     def _create_alien(self, alien_number, row_number):
         alien = Alien(self)
@@ -155,15 +163,16 @@ class AlienInvasion:
         self.settings.fleet_direction *= -1
 
     def _update_screen(self):
-        self.screen.fill(self.settings.bg_color) # the function fill() only accept one parameter which is color
-        self.ship.blitme() # draw the ship
-        for bullet in self.bullets.sprites(): # draw the bullets
+        # the function fill() only accept one parameter which is color
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()  # draw the ship
+        for bullet in self.bullets.sprites():  # draw the bullets
             bullet.draw_bullet()
-        self.aliens.draw(self.screen) # draw the aliens
+        self.aliens.draw(self.screen)  # draw the aliens
         self.sb.show_score()
         if not self.stats.game_active:
             self.play_button.draw_button()
-        pygame.display.flip() # make the current screen visible
+        pygame.display.flip()  # make the current screen visible
 
     def _update_alien(self):
         self.aliens.update()
@@ -180,6 +189,7 @@ class AlienInvasion:
                 self._update_bullets()
                 self._update_alien()
             self._update_screen()
+
 
 if __name__ == '__main__':
     ai = AlienInvasion()

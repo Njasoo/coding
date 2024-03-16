@@ -1,9 +1,20 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <cmath>
+#include <queue>
+#include <vector>
+#include <cassert>
+#include <map>
+#include <numeric>
+#include <iomanip>
+#include <set>
+#include <array>
 
 using namespace std;
 
-#define db(x) cerr << #x << " = " << (x) << endl
-#define dbp(x, y) cerr << "(" << #x << ", " << #y << ") = " << "(" << (x) << ", " << (y) << ")" << endl
+#define db(x) cerr << (#x) << " = " << x << " "
+#define el cerr << endl
 
 int main() {
     ios::sync_with_stdio(0);

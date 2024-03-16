@@ -3,16 +3,16 @@
 using namespace std;
 
 const int LOG = 18;
-int a[100005][LOG];
+int a[100005][LOG], b[100005];
 int n, m;
 
 void build() {
     for (int i = 1; i <= n; i++) {
-        st[i][0] = b[i];
+        a[i][0] = b[i];
     }
     for (int j = 1; j < LOG; j++) {
         for (int i = 1; i + (1 << j) - 1 <= n; i++) {
-            st[i][j] = max(st[i][j - 1], st[i + (1 << (j - 1))][j - 1]);
+            a[i][j] = max(a[i][j - 1], a[i + (1 << (j - 1))][j - 1]);
         }
     }
 }

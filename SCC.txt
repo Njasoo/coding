@@ -1,0 +1,47 @@
+struct SCC {
+    int n;
+    vector<int> low, dfn, bel, stk;
+    vector<vector<int>> adj;
+    int cnt, id;
+
+    SCC(int _n) : n(_n), low(n), dfn(n, -1), bel(n, -1), adj(n), cnt(0), id(0) {}
+
+    void add_edge(int u, int v) {
+        adj[u].push_back(v);
+    }
+
+    void dfs(int u) {
+        dfn[u] = low[u] = id++;
+        stk.push_back(u);
+        for (int v : adj[u]) {
+            if (dfn[v] == -1) {
+                dfs(v);
+                low[u] = min(low[u], low[v]);
+            } else if (bel[v] == -1) {
+                low[u] = min(low[u], dfn[v]);
+            }
+        }
+        if (low[u] == dfn[u]) {
+            int v;
+            do {
+                v = stk.back();
+                bel[v] = cnt;
+                stk.pop_back();
+            } while (v != u);
+            cnt++;
+        }
+    }
+
+    vector<int> work() {
+        for (int i = 0; i < n; i++) {
+            if (dfn[i] == -1) {
+                dfs(i);
+            }
+        }
+        return bel;
+    }
+    
+    int size() {
+        return cnt;
+    }
+};

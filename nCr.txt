@@ -1,0 +1,22 @@
+vector<vector<int>> nCr(int n, int r) {
+    vector<vector<int>> res;
+    vector<bool> chosen(n);
+    auto rec = [&](auto self, int cnt, int last) -> void {
+        if (cnt == r) {
+            vector<int> t;
+            for (int i = 0; i < n; i++) {
+                if (chosen[i]) t.push_back(i);
+            }
+            res.push_back(t);
+            return;
+        }
+        for (int i = last + 1; i < n; i++) {
+            if (i + (r - cnt - 1) >= n) break;
+            chosen[i] = true;
+            self(self, cnt + 1, i);
+            chosen[i] = false;
+        }
+    };
+    rec(rec, 0, -1);
+    return res;
+}

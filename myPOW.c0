@@ -1,0 +1,33 @@
+int POW(int b, int e) {
+    if (e == 0) {
+        return 1;
+    }
+    if (b == 0) {
+        return 0;
+    }
+    int res = POW(b, e - 1);
+    int MAX = 2147483647;
+    int MIN = -2147483648;
+    bool flag = true;
+    if (b <= 0 && res > 0) {
+        if (b < MIN / res) {
+            flag = false;
+        }
+    } else if (b <= 0 && res < 0) {
+        if (b < MAX / res) {
+            flag = false;
+        }
+    } else if (b >= 0 && res > 0) {
+        if (b > MAX / res) {
+            flag = false;
+        }
+    } else if (b <= 0 && res < 0) {
+        if (b > MIN / res) {
+            flag = false;
+        }
+    }
+    if (!flag) {
+        error("Overflow");
+    }
+    return b * res;
+}

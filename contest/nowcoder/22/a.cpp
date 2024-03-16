@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+using i64 = long long;
+#define db(x) cerr << #x << " = " << (x) << " "
+#define el cerr << endl
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    string s;
+    cin >> s;
+    auto it = s.find("red");
+    if (it == string::npos) {
+        cout << "No\n";
+        return 0;
+    }   
+    s = s.substr(it + 1);
+    it = s.find("red");
+    if (it == string::npos) {
+        cout << "No\n";
+        return 0;
+    }
+    cout << "Yes\n";
+    return 0;
+}

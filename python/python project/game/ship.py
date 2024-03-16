@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 
+
 class Ship(Sprite):
     def __init__(self, ai_game):
         super().__init__()
@@ -10,7 +11,7 @@ class Ship(Sprite):
         self.image = pygame.image.load('images/senpai_71x71.jpg')
         self.rect = self.image.get_rect()
         # location placement
-        self.rect.midbottom = self.screen_rect.midtop 
+        self.rect.midbottom = self.screen_rect.midtop
         # moving sign
         self.moving_right = False
         self.moving_left = False

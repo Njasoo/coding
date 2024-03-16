@@ -1,0 +1,37 @@
+[
+	{
+		"correct_answers":
+		[
+			"3\n2 5 3"
+		],
+		"test": "30\n"
+	},
+	{
+		"correct_answers":
+		[
+			"1\n1000000007"
+		],
+		"test": "1000000007\n"
+	},
+	{
+		"correct_answers":
+		[
+			"-1"
+		],
+		"test": "4\n"
+	},
+	{
+		"correct_answers":
+		[
+			"2\n2 3"
+		],
+		"test": "6\n"
+	},
+	{
+		"correct_answers":
+		[
+			"3\n3 2 3"
+		],
+		"test": "18\n"
+	}
+]
