@@ -1,18 +1,14 @@
 #include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <queue>
+#include <vector>
 
 using namespace std;
 
-void solve() {
-    int n;
-    scanf("%d", &n);
-    
-}
-
 int main() {
-    int T;
-    scanf("%d", &T);
-    while (T--) {
-        solve();
-    }
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+       
     return 0;
 }
