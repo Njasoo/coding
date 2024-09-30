@@ -1,0 +1,21 @@
+void dijkstra(int s) {
+    for (int i = 1; i <= n; i++) {
+        dis[i] = 1e18;
+        vis[i] = 0;
+    }
+    dis[s] = 0;
+    priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<>> q;
+    q.push({dis[s], 1LL * s});
+    while (!q.empty()) {
+        auto [d, u] = q.top();
+        q.pop();
+        if (vis[u]) continue;
+        vis[u] = 1;
+        for (auto [v, w] : adj[u]) {
+            if (d + w < dis[v]) {
+                dis[v] = d + w;
+                q.push({d + w, v});
+            }
+        }
+    }
+}

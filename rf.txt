@@ -1,0 +1,10 @@
+// 统计区间元素出现次数
+namespace rf {
+    map<ll, vector<int>> pos;
+
+    int query(int l, int r, int val) {
+        int pos1 = lower_bound(pos[val].begin(), pos[val].end(), l) - pos[val].begin();
+        int pos2 = upper_bound(pos[val].begin(), pos[val].end(), r) - pos[val].begin();
+        return pos2 - pos1;
+    }
+}

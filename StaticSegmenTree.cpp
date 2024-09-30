@@ -20,15 +20,17 @@ struct StaticSegmentTree {
     }
 
     T query(int s, int e) {
-        assert(s >= 0 && e < n);
-        s++, e++;
+        assert(s >= 1 && e <= n);
         auto work = [&](auto self, int id, int l, int r, int s, int e) -> T {
             if (l == s && r == e) {
                 return t[id];
             }
             int mid = (l + r) / 2;
-            if (e <= mid) return self(self, id * 2, l, mid, s, e);
-            else if (s > mid) return self(self, id * 2 + 1, mid + 1, r, s, e);
+            if (e <= mid) {
+                return self(self, id * 2, l, mid, s, e);
+            } else if (s > mid) {
+                return self(self, id * 2 + 1, mid + 1, r, s, e);
+            }
             auto L = self(self, id * 2, l, mid, s, mid);
             auto R = self(self, id * 2 + 1, mid + 1, r, mid + 1, e);
             return func(L, R);

@@ -31,7 +31,7 @@ struct SegmentTree {
     }
 
     void modify(int s, int e, T k) {
-        s++, e++;
+        // s++, e++;
         update(1, 1, n, s, e, k);
     }
 
@@ -51,7 +51,7 @@ struct SegmentTree {
     }
 
     T query(int l, int r) {
-        l++, r++;
+        // l++, r++;
         return query(1, 1, n, l, r);
     }
     
