@@ -97,7 +97,7 @@
     //     "editor.defaultFormatter": "ms-python.autopep8"
     // },
     "python.formatting.provider": "none",
-    "C_Cpp.clang_format_style": "{ IndentWidth: 4}",
+    // "C_Cpp.clang_format_style": "{ IndentWidth: 4}",
     "latex-workshop.latex.recipes": [
         {
             "name": "xelatex",

@@ -1,16 +1,10 @@
-def solve():
+tt=int(input())
+while tt>0:
+    tt-=1
     n=int(input())
-    a=list(map(int,input().split()))
     ans=0
-    for i in range(len(a)):
-        if a[i]%2==0:
-            ans+=a[i]
-        else:
-            ans-=a[i]
+    for i in range(64):
+        if (1<<i)>=n:
+            ans=1<<i
+            break
     print(ans)
-
-if __name__=="__main__":
-    T=int(input())
-    while T>0:
-        T-=1
-        solve()
