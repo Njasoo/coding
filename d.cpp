@@ -1,49 +1,40 @@
-#include <iostream>
-#include <vector>
+#include<bits/stdc++.h>
 using namespace std;
+using ll=long long;
+using ull=unsigned long long;
+#define db(x) cerr << #x << "=" << (x) << " "
+#define el cerr << "\n"
 
-int calc(int num)
-{
-	string s;
-	while(num)
-	{
-		s.push_back(char(num%2+'0'));
-		num/=2;
+void solve() {
+	int n, m;
+	cin >> n >> m;
+	for (int i=1; i<=n; i++) {
+		cin >> a[i];
+		ans+=a[i];
+		if (a[i]%2==0) {
+			ans+=a[i];
+		} else {
+			ans-=a[i];
+		}
 	}
-	int res=0;
-	for(int i=s.size()-1;i>=0;i--)
-	{
-		res=res*10+s[i]-'0';
+	for (int i=1; i<=n; i++) {
+		cin >> a[i];
+		ans+=a[i];
+		int t=a[i];
+		while (t) {
+			t/=2;
+			len++;
+		}
 	}
-	return res;
 }
 
-int main()
-{
-	vector<int> nums;
-	for(int i=2;i<=64;i++)
-	{
-		nums.push_back(calc(i));
-//		cout<<nums.back()<<" ";
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tt;
+	cin >> tt;
+	while (tt--) {
+		solve();
 	}
-//	cout<<endl;
-	int T;
-	cin>>T;
-	while(T--)
-	{
-		int n;
-		cin>>n;
-		for(int i=nums.size()-1;i>=0;i--)
-		{
-			while(n%nums[i]==0)
-			{
-				n/=nums[i];
-			}
-		}
-//		cout<<"n="<<n<<endl;
-		if(n==1) cout<<"YES"<<endl;
-		else cout<<"NO"<<endl;
-	}	
 	return 0;
 }
-

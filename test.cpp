@@ -1,16 +1,18 @@
 #include <bits/stdc++.h>
-using namespace std;
 #define db(x) cerr<<#x<<"="<<(x)<<" "
 #define el cerr<<endl
-#define sz(x) (int)(x).size()
-#define endl '\n'
-typedef long long ll;
-typedef unsigned long long ull;
+#define pb push_back
+using ll=long long;
+using namespace std;
 
 int main()
 {
-    ios::sync_with_stdio(false);
+    ios::sync_with_stdio(0);
     cin.tie(0);
-       
+    int iter=100;
+    while(iter--)
+    {
+        ofstream fout("in");
+    }   
     return 0;
 }
